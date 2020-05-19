@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ModuleSukaNew/ModuleSukaNew.iml" filepath="$PROJECT_DIR$/ModuleSukaNew/ModuleSukaNew.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestClass/TestClass.iml" filepath="$PROJECT_DIR$/TestClass/TestClass.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/VIAFitJAVA.iml" filepath="$PROJECT_DIR$/.idea/VIAFitJAVA.iml" />
       <module fileurl="file://$PROJECT_DIR$/nou/nou.iml" filepath="$PROJECT_DIR$/nou/nou.iml" />
