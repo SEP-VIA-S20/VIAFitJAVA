@@ -11,7 +11,7 @@ public class Loader extends Application
   {
     window.setTitle("Calculator");
     FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(getClass().getResource("GUI.fxml"));
+    loader.setLocation(getClass().getResource("GUI2.fxml"));
 
     Scene scene = new Scene(loader.load());
     window.setScene(scene);
