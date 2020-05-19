@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="400.0">
+         <children>
+            <TextField fx:id="field" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleClick" prefHeight="100.0" prefWidth="300.0">
+               <font>
+                  <Font name="Calibri Light" size="30.0" />
+               </font>
+            </TextField>
+            <Button fx:id="clearButton" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="Clear">
+               <font>
+                  <Font name="Yu Gothic Regular" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox prefHeight="400.0" prefWidth="400.0">
+         <children>
+            <VBox fillWidth="false" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="Button7" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="7">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Button4" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="4">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Button1" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="1">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Button0" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="0">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox fillWidth="false" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="Button8" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="8">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Button5" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="5">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Button2" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="2">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="ButtonDot" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text=".">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox fillWidth="false" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="Button9" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="9">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Button6" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="6">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="Button3" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="3">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="ButtonEquals" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="=">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox fillWidth="false" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="ButtonDivision" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="/">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="ButtonMultiplication" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="*">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="ButtonSubtract" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="-">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="ButtonAdd" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="100.0" text="+">
+                     <font>
+                        <Font name="Yu Gothic Regular" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
