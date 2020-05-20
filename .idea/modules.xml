@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GUITest/GUITest.iml" filepath="$PROJECT_DIR$/GUITest/GUITest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Instructor/Instructor.iml" filepath="$PROJECT_DIR$/Instructor/Instructor.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Test2/Test2.iml" filepath="$PROJECT_DIR$/Test2/Test2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/VIAFitJAVA.iml" filepath="$PROJECT_DIR$/.idea/VIAFitJAVA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
     </modules>
   </component>
 </project>
