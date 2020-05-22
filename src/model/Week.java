@@ -62,7 +62,7 @@ public class Week
   {
     if(!(obj instanceof Week)) return false;
     Week week = (Week)obj;
-    return obj.toString().equals(toString());
+    return week.toString().equals(toString());
   }
   //    public static void main(String[] args)
 //    {
