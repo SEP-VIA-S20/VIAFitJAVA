@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.Scene;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -61,5 +63,17 @@ public class ScheduledClass implements Serializable
   public void setTime(Date time)
   {
     this.time = time;
+  }
+
+  @Override public String toString()
+  {
+    return super.toString().replace("]"," | Members: " + members+ " ]");
+  }
+
+  @Override public boolean equals(Object obj)
+  {
+    if(!(obj instanceof ScheduledClass)) return false;
+    ScheduledClass temp = (ScheduledClass)obj;
+    return temp.toString().equals(toString());
   }
 }

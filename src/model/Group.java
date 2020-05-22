@@ -48,4 +48,15 @@ public class Group implements Serializable
     this.instructor = instructor;
   }
 
+  @Override public String toString()
+  {
+    return "[ Class "+name+" | Limit : "+maxLimit+" | Instructor: "+instructor.toString()+" ]";
+  }
+
+  @Override public boolean equals(Object obj)
+  {
+    if(!(obj instanceof Group)) return false;
+    Group group = (Group)obj;
+    return group.toString().equals(toString());
+  }
 }
