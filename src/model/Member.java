@@ -26,7 +26,7 @@ public class Member extends Person implements Serializable
   @Override public String toString()
   {
     if(premiumMember) return "Premium member: "+super.toString();
-    return "Member: "+super.toString();
+    return "        Member: "+super.toString();
   }
 
   @Override public boolean equals(Object obj)

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Week
+public class Week implements Serializable
 {
   private int weekNumber;
   private ArrayList<Day> days;
