@@ -34,11 +34,16 @@ public class MemberList implements Serializable
   }
   public Member getMemberByPhone(int phone)
   {
-    return members.get(indexOfPhoneNumber(phone));
+    if((indexOfPhoneNumber(phone)!=-1)) return members.get(indexOfPhoneNumber(phone));
+    return null;
   }
   public void addMember(Member member)
   {
     members.add(member);
+  }
+  public void removeMember(int index)
+  {
+    members.remove(index);
   }
   public void removeMember(Member member)
   {
