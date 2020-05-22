@@ -64,7 +64,14 @@ public class Date implements Serializable
     this.month = month;
     this.year = newDate.getYear();
   }
-
+  public Date(int day)
+  {
+    LocalDate newDate = LocalDate.now();
+    this.day = day;
+    this.month = newDate.getMonthValue();
+    this.year = newDate.getYear();
+    this.time = new Time(0,0);
+  }
   public Date(int hour, int minute)
   {
     LocalDate newDate = LocalDate.now();

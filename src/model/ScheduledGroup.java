@@ -1,17 +1,15 @@
 package model;
 
-import javafx.scene.Scene;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ScheduledClass implements Serializable
+public class ScheduledGroup implements Serializable
 {
   private Group group;
   private ArrayList<Member> members;
   private Date time;
 
-  public ScheduledClass(Group group,Date time)
+  public ScheduledGroup(Group group,Date time)
   {
     this.group = group;
     this.time = time;
@@ -44,7 +42,6 @@ public class ScheduledClass implements Serializable
       }
       return null;
     }
-
   public Group getGroup()
   {
     return group;
@@ -67,13 +64,13 @@ public class ScheduledClass implements Serializable
 
   @Override public String toString()
   {
-    return super.toString().replace("]"," | Members: " + members+ " ]");
+    return group.toString()+" | Members: " + members;
   }
 
   @Override public boolean equals(Object obj)
   {
-    if(!(obj instanceof ScheduledClass)) return false;
-    ScheduledClass temp = (ScheduledClass)obj;
+    if(!(obj instanceof ScheduledGroup)) return false;
+    ScheduledGroup temp = (ScheduledGroup)obj;
     return temp.toString().equals(toString());
   }
 }
