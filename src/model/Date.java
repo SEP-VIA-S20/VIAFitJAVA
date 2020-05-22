@@ -1,6 +1,9 @@
+package model;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 public class Date implements Serializable
 {
   private int day;
@@ -53,6 +56,15 @@ public class Date implements Serializable
     Time tempTime = new Time(newTime.getHour(),newTime.getMinute());
     return new Date(newDate.getDayOfMonth(),newDate.getMonthValue(),newDate.getYear(),tempTime);
   }
+  public Date(int day,int month,int hour,int minute)
+  {
+    LocalDate newDate = LocalDate.now();
+    this.time = new Time(hour, minute);
+    this.day = day;
+    this.month = month;
+    this.year = newDate.getYear();
+  }
+
   public Date(int hour, int minute)
   {
     LocalDate newDate = LocalDate.now();

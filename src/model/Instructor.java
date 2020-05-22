@@ -1,3 +1,5 @@
+package model;
+
 import java.io.Serializable;
 
 public class Instructor extends Person implements Serializable
@@ -34,7 +36,7 @@ public class Instructor extends Person implements Serializable
 
 //  public static void main(String[] args)
 //  {
-//    Instructor DEN = new Instructor("DEN","STRAND",31,"GERSDOR","NONE");
+//    Instructor DEN = new Instructor("DEN","STRAND",31,"GERSDOR",2001,"none");
 //    System.out.println(DEN);
 //  }
 }
