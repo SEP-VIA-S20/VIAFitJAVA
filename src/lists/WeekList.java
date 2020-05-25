@@ -28,9 +28,9 @@ public class WeekList implements Serializable
   {
     weeks.add(week);
   }
-  public void removeWeek(Week instructor)
+  public void removeWeek(Week week)
   {
-    weeks.remove(instructor);
+    weeks.remove(week);
   }
   public void removeWeek(int index)
   {
