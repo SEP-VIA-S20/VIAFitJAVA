@@ -21,7 +21,7 @@ public class DateList implements Serializable
   public Date getDate(int index)
   {
     return dates.get(index);
-
+  }
   public void addDate(Date date)
   {
     dates.add(date);
