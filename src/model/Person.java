@@ -19,6 +19,11 @@ public abstract class Person implements Serializable
     this.ID = ID;
   }
 
+  public void setID(int ID)
+  {
+    this.ID = ID;
+  }
+
   public int getID()
   {
     return ID;

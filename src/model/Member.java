@@ -35,9 +35,9 @@ public class Member extends Person implements Serializable
     Member member = (Member)obj;
     return member.toString().equals(toString());
   }
-  //  public static void main(String[] args)
-//  {
-//    Member den = new Member("Den","strend",312,"@dev",true);
-//    System.out.println(den);
-//  }
+    public static void main(String[] args)
+  {
+    Member den = new Member("Den","strend",312,"@dev",2010,true);
+    System.out.println(den);
+  }
 }
