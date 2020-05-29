@@ -86,13 +86,7 @@ public class InstructorFileAdapter
   public void deleteInstructor(Instructor instructor)
   {
     InstructorList instructors = getAllInstructors();
-    for (int i = 0; i < instructors.size(); i++)
-    {
-      if (instructors.getInstructor(i).equals(instructor))
-      {
-        instructors.removeInstructor(i);
-      }
-    }
+    instructors.removeInstructor(instructor);
     saveInstructors(instructors);
   }
 
