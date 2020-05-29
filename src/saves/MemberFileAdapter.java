@@ -3,7 +3,6 @@ package saves;
 import lists.MemberList;
 import model.Member;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -110,12 +109,18 @@ public class MemberFileAdapter
       String[] tempArray = temp.split(",");
       String name = tempArray[0];
       String address = tempArray[1];
-      int  phone = Integer.parseInt(tempArray[2].trim());
+      int  phone = Integer.parseInt(tempArray[2].trim().replaceFirst(".{3}$",""));
       String email = tempArray[3];
       boolean premium = Boolean.parseBoolean(tempArray[4]);
       Member member = new Member(name,address,phone,email,0,premium);
       memberList.addMember(member);
     }
     saveMembers(memberList);
+  }
+  public static void main(String[] args)
+  {
+    MemberFileAdapter members = new MemberFileAdapter("src/data/members.bin");
+    members.importCSV("src/data/members.csv");
+    System.out.println(members.getAllMembers());
   }
 }
