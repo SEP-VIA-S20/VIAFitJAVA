@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class InstructorList implements Serializable
 {
   private ArrayList<Instructor> instructors;
+  private int lastID;
 
   public InstructorList()
   {
     instructors = new ArrayList<Instructor>();
+    lastID = 0;
   }
   public int size()
   {
@@ -36,6 +38,8 @@ public class InstructorList implements Serializable
   }
   public void addInstructor(Instructor instructor)
   {
+    instructor.setID(lastID);
+    lastID++;
     instructors.add(instructor);
   }
   public void removeInstructor(Instructor instructor)
