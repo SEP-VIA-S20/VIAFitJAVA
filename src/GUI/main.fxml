@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -19,7 +20,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
       <AnchorPane>
          <children>
@@ -42,18 +43,18 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="444.0" layoutY="4.0" prefHeight="17.0" prefWidth="118.0" text="Status" textAlignment="RIGHT" />
+            <Label fx:id="statusLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="444.0" layoutY="4.0" prefHeight="17.0" prefWidth="118.0" text="Status" textAlignment="RIGHT" />
          </children>
       </AnchorPane>
-      <TabPane prefHeight="375.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="mainTabPane" prefHeight="375.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Members">
+          <Tab fx:id="membersTab" onSelectionChanged="#handleClick" text="Members">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="351.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="membersTabPane" prefHeight="351.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
-                              <Tab text="Search">
+                              <Tab fx:id="searchMemberTab" onSelectionChanged="#handleClick" text="Search">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -125,7 +126,7 @@
                                     </AnchorPane>
                                 </content>
                               </Tab>
-                            <Tab text="Add Member">
+                            <Tab fx:id="addMemberTab" onSelectionChanged="#handleClick" text="Add Member">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -239,7 +240,7 @@
                                        </children></AnchorPane>
                               </content>
                             </Tab>
-                              <Tab text="All Members">
+                              <Tab fx:id="allMembersTab" onSelectionChanged="#handleClick" text="All Members">
                                  <content>
                                     <AnchorPane>
                                        <children>
@@ -259,7 +260,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab text="Edit Member">
+                              <Tab fx:id="editMemberTab" onSelectionChanged="#handleClick" text="Edit Member">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -1296,4 +1297,8 @@
         </tabs>
       </TabPane>
    </children>
+   <stylesheets>
+      <URL value="@../../../../Desktop/style.css" />
+      <URL value="@style.css" />
+   </stylesheets>
 </VBox>
