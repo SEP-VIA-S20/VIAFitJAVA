@@ -63,7 +63,12 @@ public class MemberList implements Serializable
     }
     return returned;
   }
-//    public static void main(String[] args)
+
+  public ArrayList<Member> getList()
+  {
+    return members;
+  }
+  //    public static void main(String[] args)
 //    {
 //      Member den = new Member("Den","Strandgade",312,"@dev",2709,true);
 //      Member den1 = new Member("Daniel","Gersdorffs",503700,"@den",9901,false);

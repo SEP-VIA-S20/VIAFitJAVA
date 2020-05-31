@@ -17,6 +17,8 @@ public class Loader extends Application
     FXMLLoader loader = new FXMLLoader();
     loader.setLocation(getClass().getResource("main.fxml"));
     Scene scene = new Scene(loader.load());
+    Controller temp = loader.getController();
+    temp.init();
     window.setScene(scene);
     window.show();
   }

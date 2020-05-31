@@ -46,4 +46,8 @@ public class GroupList implements Serializable
     return returned;
   }
 
+  public ArrayList<Group> getList()
+  {
+    return groups;
+  }
 }
