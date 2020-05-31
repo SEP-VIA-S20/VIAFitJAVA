@@ -23,6 +23,31 @@ public class Week implements Serializable
   {
     this.weekNumber = weekNumber;
   }
+  public void addGroup(ScheduledGroup group)
+  {
+    int day = group.getTime().getDay();
+    int dayIndex = -1;
+    boolean contains = false;
+    for (int i = 0; i < days.size(); i++)
+    {
+      if (days.get(i).getDate().getDay() == day)
+      {
+        contains = true;
+        dayIndex = i;
+      }
+    }
+    if(contains)
+    {
+      Day temp = days.get(dayIndex);
+      temp.addGroup(group);
+      days.set(dayIndex,temp);
+    }else
+    {
+      Day toAdd = new Day(day);
+      toAdd.addGroup(group);
+      days.add(toAdd);
+    }
+  }
 
   public ArrayList<Day> getDays()
   {
@@ -54,7 +79,7 @@ public class Week implements Serializable
     String returned = "Week nr: "+ weekNumber;
     for(int i=0;i<days.size();i++)
     {
-      returned+="\n"+days.get(i).toString().replace("Day","Day nr "+(i+1));
+      returned+="\n"+days.get(i).toString();
     }
     return returned;
   }
