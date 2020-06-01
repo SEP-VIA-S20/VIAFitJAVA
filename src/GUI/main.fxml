@@ -31,12 +31,12 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="1000.0">
                                        <children>
-                                          <TextField layoutX="102.0" layoutY="224.0" prefHeight="70.0" />
-                                          <Button layoutX="875.0" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Add to Group" />
-                                          <Button layoutX="104.0" layoutY="318.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="197.0" text="Search" />
-                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Edit" />
+                                          <TextField fx:id="searchMemberPhoneField" layoutX="102.0" layoutY="224.0" prefHeight="70.0" />
+                                          <Button layoutX="875.0" layoutY="8.0" mnemonicParsing="false" onAction="#addToGroupSearched" prefHeight="25.0" prefWidth="125.0" text="Add to Group" />
+                                          <Button layoutX="104.0" layoutY="318.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="37.0" prefWidth="197.0" text="Search" />
+                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" onAction="#editMember" prefHeight="25.0" prefWidth="57.0" text="Edit" />
                                           <Label layoutX="178.0" layoutY="165.0" prefHeight="25.0" prefWidth="49.0" text="Phone" />
-                                          <TextField layoutX="516.0" layoutY="224.0" prefHeight="70.0" prefWidth="309.0">
+                                          <TextField fx:id="showMemberField" layoutX="516.0" layoutY="224.0" prefHeight="70.0" prefWidth="309.0">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -107,7 +107,7 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="memberNameFieldAdd" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
@@ -117,17 +117,17 @@
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="memberPhoneAdd" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="memberEmailAdd" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <CheckBox mnemonicParsing="false" text="Premium">
+                                                            <CheckBox fx:id="memberPremiumAdd" mnemonicParsing="false" text="Premium">
                                                                <padding>
                                                                   <Insets left="10.0" top="5.0" />
                                                                </padding>
@@ -147,7 +147,7 @@
                                                       <Insets left="40.0" />
                                                    </HBox.margin>
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="137.0" text="Add member">
+                                                      <Button mnemonicParsing="false" onAction="#addMember" prefHeight="37.0" prefWidth="137.0" text="Add member">
                                                          <VBox.margin>
                                                             <Insets left="330.0" />
                                                          </VBox.margin>
@@ -176,8 +176,8 @@
                                                 <TableColumn fx:id="allMembersMembership" prefWidth="146.0" text="Membership" />
                                             </columns>
                                           </TableView>
-                                          <Button layoutX="915.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteMember" prefHeight="30.0" prefWidth="85.0" text="Delete" />
+                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editMember" prefHeight="30.0" prefWidth="85.0" text="Edit" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -244,27 +244,27 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="memberNameFieldEdit" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="memberAddressEdit" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="memberPhoneEdit" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="memberEmailEdit" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <CheckBox mnemonicParsing="false" text="Premium">
+                                                            <CheckBox fx:id="memberPremiumEdit" mnemonicParsing="false" text="Premium">
                                                                <padding>
                                                                   <Insets left="10.0" top="5.0" />
                                                                </padding>
@@ -284,7 +284,7 @@
                                                       <Insets left="40.0" />
                                                    </HBox.margin>
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="137.0" text="Save edits">
+                                                      <Button mnemonicParsing="false" onAction="#saveEditedMember" prefHeight="37.0" prefWidth="137.0" text="Save edits">
                                                          <VBox.margin>
                                                             <Insets left="330.0" />
                                                          </VBox.margin>
@@ -323,8 +323,8 @@
                                                 <TableColumn fx:id="allGroupsMaxAttendants" prefWidth="311.0" text="Max attendants" />
                                              </columns>
                                           </TableView>
-                                          <Button layoutX="915.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="45.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteGroup" prefHeight="30.0" prefWidth="85.0" text="Delete" />
+                                          <Button layoutX="915.0" layoutY="45.0" mnemonicParsing="false" onAction="#editGroup" prefHeight="30.0" prefWidth="85.0" text="Edit" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -373,17 +373,17 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="groupNameAdd" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <ComboBox prefHeight="37.0" prefWidth="265.0" promptText="Select" />
+                                                            <ComboBox fx:id="allInstructorsAddGroup" prefHeight="37.0" prefWidth="265.0" promptText="Select" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="maxAttendantsAdd" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0" />
@@ -398,7 +398,7 @@
                                                       <Insets left="40.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="Add group">
+                                                <Button mnemonicParsing="false" onAction="#addGroup" prefHeight="0.0" prefWidth="100.0" text="Add group">
                                                    <HBox.margin>
                                                       <Insets left="75.0" top="5.0" />
                                                    </HBox.margin>
@@ -456,17 +456,17 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="groupNameEdit" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <ComboBox prefHeight="37.0" prefWidth="265.0" promptText="Select" />
+                                                            <ComboBox fx:id="allInstructorsEditGroup" prefHeight="37.0" prefWidth="265.0" promptText="Select" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
+                                                            <TextField fx:id="maxAttendantsEdit" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0" />
@@ -481,7 +481,7 @@
                                                       <Insets left="40.0" />
                                                    </HBox.margin>
                                                 </VBox>
-                                                <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="Save edits">
+                                                <Button mnemonicParsing="false" onAction="#saveEditedGroup" prefHeight="0.0" prefWidth="100.0" text="Save edits">
                                                    <HBox.margin>
                                                       <Insets left="75.0" top="5.0" />
                                                    </HBox.margin>
@@ -510,16 +510,11 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="1030.0">
                                        <children>
-                                          <TextField layoutX="102.0" layoutY="224.0" prefHeight="70.0" />
-                                          <Button layoutX="104.0" layoutY="318.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="197.0" text="Search" />
-                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Edit" />
+                                          <TextField fx:id="searchInstructorPhoneField" layoutX="102.0" layoutY="224.0" prefHeight="70.0" />
+                                          <Button layoutX="104.0" layoutY="318.0" mnemonicParsing="false" onAction="#searchInstructor" prefHeight="37.0" prefWidth="197.0" text="Search" />
+                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" onAction="#editInstructor" prefHeight="25.0" prefWidth="57.0" text="Edit" />
                                           <Label layoutX="178.0" layoutY="165.0" prefHeight="25.0" prefWidth="49.0" text="Phone" />
-                                          <TableView layoutX="500.0" layoutY="223.0" prefHeight="73.0" prefWidth="313.0">
-                                             <columns>
-                                                <TableColumn prefWidth="130.0" text="Phone" />
-                                                <TableColumn prefWidth="182.0" text="Name" />
-                                             </columns>
-                                          </TableView>
+                                          <TextField fx:id="showInstructorField" layoutX="450.0" layoutY="228.0" prefHeight="65.0" prefWidth="201.0" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -586,25 +581,25 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="292.0" />
+                                                            <TextField fx:id="instructorNameFieldAdd" prefHeight="37.0" prefWidth="292.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="298.0" />
+                                                            <TextField fx:id="instructorAddressAdd" prefHeight="37.0" prefWidth="298.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="271.0" />
+                                                            <TextField fx:id="instructorPhoneAdd" prefHeight="37.0" prefWidth="271.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="330.0" />
+                                                            <TextField fx:id="instructorEmailAdd" prefHeight="37.0" prefWidth="330.0" />
                                                          </children>
                                                       </HBox>
-                                                      <TextArea prefHeight="200.0" prefWidth="163.0" />
+                                                      <TextArea fx:id="instructorDescriptionAdd" prefHeight="200.0" prefWidth="163.0" />
                                                       <HBox layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="100.0" />
                                                    </children>
                                                    <padding>
@@ -616,7 +611,7 @@
                                                       <Insets left="40.0" />
                                                    </HBox.margin>
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="149.0" text="Add instructor">
+                                                      <Button mnemonicParsing="false" onAction="#addInstructor" prefHeight="37.0" prefWidth="149.0" text="Add instructor">
                                                          <VBox.margin>
                                                             <Insets left="230.0" />
                                                          </VBox.margin>
@@ -636,18 +631,18 @@
                                  <content>
                                     <AnchorPane>
                                        <children>
-                                          <TableView layoutY="-1.0" prefHeight="619.0" prefWidth="906.0">
+                                          <TableView fx:id="allInstructorsTable" layoutY="-1.0" prefHeight="619.0" prefWidth="906.0">
                                              <columns>
-                                                <TableColumn prefWidth="43.0" text="ID" />
-                                                <TableColumn prefWidth="237.0" text="Full Name" />
-                                                <TableColumn prefWidth="148.0" text="Address" />
-                                                <TableColumn prefWidth="136.0" text="Phone" />
-                                                <TableColumn prefWidth="141.0" text="Email" />
-                                                <TableColumn prefWidth="200.0" text="Description" />
+                                                <TableColumn fx:id="allInstructorsID" prefWidth="43.0" text="ID" />
+                                                <TableColumn fx:id="allInstructorsFullName" prefWidth="237.0" text="Full Name" />
+                                                <TableColumn fx:id="allInstructorsAddress" prefWidth="148.0" text="Address" />
+                                                <TableColumn fx:id="allInstructorsPhone" prefWidth="136.0" text="Phone" />
+                                                <TableColumn fx:id="allInstructorsEmail" prefWidth="141.0" text="Email" />
+                                                <TableColumn fx:id="allInstructorsDescription" prefWidth="200.0" text="Description" />
                                              </columns>
                                           </TableView>
-                                          <Button layoutX="915.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteInstructor" prefHeight="30.0" prefWidth="85.0" text="Delete" />
+                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editInstructor" prefHeight="30.0" prefWidth="85.0" text="Edit" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -714,25 +709,25 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="292.0" />
+                                                            <TextField fx:id="instructorNameFieldEdit" prefHeight="37.0" prefWidth="292.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="298.0" />
+                                                            <TextField fx:id="instructorAddressEdit" prefHeight="37.0" prefWidth="298.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="271.0" />
+                                                            <TextField fx:id="instructorPhoneEdit" prefHeight="37.0" prefWidth="271.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="330.0" />
+                                                            <TextField fx:id="instructorEmailEdit" prefHeight="37.0" prefWidth="330.0" />
                                                          </children>
                                                       </HBox>
-                                                      <TextArea prefHeight="200.0" prefWidth="163.0" />
+                                                      <TextArea fx:id="instructorDescriptionEdit" prefHeight="200.0" prefWidth="163.0" />
                                                       <HBox layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="100.0" />
                                                    </children>
                                                    <padding>
@@ -744,7 +739,7 @@
                                                       <Insets left="40.0" />
                                                    </HBox.margin>
                                                    <children>
-                                                      <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="117.0" text="Save edits">
+                                                      <Button mnemonicParsing="false" onAction="#saveEditedInstructor" prefHeight="37.0" prefWidth="117.0" text="Save edits">
                                                          <VBox.margin>
                                                             <Insets left="280.0" />
                                                          </VBox.margin>
@@ -834,28 +829,28 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="303.0" />
+                                                            <TextField fx:id="scheduleGroupName" prefHeight="37.0" prefWidth="303.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <ComboBox prefHeight="37.0" prefWidth="341.0" promptText="Select" />
+                                                            <ComboBox fx:id="scheduleGroupInstructorsCombo" prefHeight="37.0" prefWidth="341.0" promptText="Select" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="235.0" />
+                                                            <TextField fx:id="scheduleGroupMaxAttendants" prefHeight="37.0" prefWidth="235.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <DatePicker />
+                                                            <DatePicker fx:id="scheduleGroupDatePicker" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="100.0" spacing="5.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
-                                                            <TextField layoutX="10.0" layoutY="10.0" prefHeight="70.0" />
+                                                            <TextField fx:id="scheduleGroupHour" prefHeight="70.0" />
+                                                            <TextField fx:id="scheduleGroupMinutes" layoutX="10.0" layoutY="10.0" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -875,7 +870,7 @@
                                                       </AnchorPane>
                                                    </children>
                                                 </VBox>
-                                                <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="148.0" text="Schedule class">
+                                                <Button mnemonicParsing="false" onAction="#scheduleClass" prefHeight="37.0" prefWidth="148.0" text="Schedule class">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -893,16 +888,17 @@
                                  <content>
                                     <AnchorPane>
                                        <children>
-                                          <TableView prefHeight="618.0" prefWidth="908.0">
+                                          <TableView fx:id="allScheduledGroupsTable" prefHeight="618.0" prefWidth="908.0">
                                              <columns>
-                                                <TableColumn prefWidth="132.0" text="Group name" />
-                                                <TableColumn prefWidth="158.0" text="Instructor" />
-                                                <TableColumn prefWidth="138.0" text="Max attendants" />
-                                                <TableColumn prefWidth="479.0" text="Members" />
+                                                <TableColumn fx:id="allScheduledGroupsName" prefWidth="132.0" text="Group name" />
+                                                <TableColumn fx:id="allScheduledGroupsInstructor" prefWidth="158.0" text="Instructor" />
+                                                <TableColumn fx:id="allScheduledGroupsMaxAttendants" prefWidth="138.0" text="Max attendants" />
+                                                <TableColumn fx:id="allScheduledGroupsDate" minWidth="0.0" prefWidth="163.33331298828125" text="Time and date" />
+                                                <TableColumn fx:id="allScheduledGroupsMembers" minWidth="0.0" prefWidth="288.33331298828125" text="Members" />
                                              </columns>
                                           </TableView>
-                                          <Button layoutX="915.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteScheduledGroup" prefHeight="30.0" prefWidth="85.0" text="Delete" />
+                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editScheduledGroup" prefHeight="30.0" prefWidth="85.0" text="Edit" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -1021,20 +1017,20 @@
                                  <content>
                                     <AnchorPane>
                                        <children>
-                                          <TableView prefHeight="618.0" prefWidth="408.0">
+                                          <TableView fx:id="addMemberMemberTable" prefHeight="618.0" prefWidth="408.0">
                                             <columns>
-                                              <TableColumn prefWidth="175.0" text="Member name" />
-                                              <TableColumn prefWidth="232.0" text="Phone" />
+                                              <TableColumn fx:id="addMemberMemberName" prefWidth="175.0" text="Member name" />
+                                              <TableColumn fx:id="addMemberMemberPhone" prefWidth="232.0" text="Phone" />
                                             </columns>
                                           </TableView>
-                                          <TableView layoutX="594.0" layoutY="1.0" prefHeight="618.0" prefWidth="406.0">
+                                          <TableView fx:id="addMemberGroupTable" layoutX="594.0" layoutY="1.0" prefHeight="618.0" prefWidth="406.0">
                                              <columns>
-                                                <TableColumn prefWidth="202.0" text="Group name" />
-                                                <TableColumn prefWidth="203.0" text="Space left" />
+                                                <TableColumn fx:id="addMemberGroupName" prefWidth="202.0" text="Group name" />
+                                                <TableColumn fx:id="addMemberSpaceLeft" prefWidth="203.0" text="Space left" />
                                              </columns>
                                           </TableView>
-                                          <Button layoutX="415.0" layoutY="154.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="172.0" text="Add to group" />
-                                          <Button layoutX="414.0" layoutY="199.0" mnemonicParsing="false" text="Edit scheduled group" />
+                                          <Button layoutX="415.0" layoutY="154.0" mnemonicParsing="false" onAction="#addMemberToGroupTable" prefHeight="37.0" prefWidth="172.0" text="Add to group" />
+                                          <Button layoutX="414.0" layoutY="199.0" mnemonicParsing="false" onAction="#editScheduledGroup" text="Edit scheduled group" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -1101,28 +1097,28 @@
                                                    <children>
                                                       <HBox prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="303.0" />
+                                                            <TextField fx:id="editScheduledGroupName" prefHeight="37.0" prefWidth="303.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <ComboBox prefHeight="37.0" prefWidth="341.0" promptText="Select" />
+                                                            <ComboBox fx:id="editScheduledGroupInstructorsCombo" prefHeight="37.0" prefWidth="341.0" promptText="Select" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="35.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <TextField prefHeight="37.0" prefWidth="235.0" />
+                                                            <TextField fx:id="editScheduledGroupMaxAttendants" prefHeight="37.0" prefWidth="235.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="61.0" prefHeight="0.0" prefWidth="100.0">
                                                          <children>
-                                                            <DatePicker />
+                                                            <DatePicker fx:id="editScheduledGroupDatePicker" />
                                                          </children>
                                                       </HBox>
                                                       <HBox layoutX="10.0" layoutY="86.0" prefHeight="0.0" prefWidth="100.0" spacing="5.0">
                                                          <children>
-                                                            <TextField prefHeight="70.0" />
-                                                            <TextField layoutX="10.0" layoutY="10.0" prefHeight="70.0" />
+                                                            <TextField fx:id="editScheduledGroupHour" prefHeight="70.0" />
+                                                            <TextField fx:id="editScheduledGroupMinutes" layoutX="10.0" layoutY="10.0" prefHeight="70.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -1142,7 +1138,7 @@
                                                       </AnchorPane>
                                                    </children>
                                                 </VBox>
-                                                <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="148.0" text="Save changes">
+                                                <Button mnemonicParsing="false" onAction="#saveEditedScheduledGroup" prefHeight="37.0" prefWidth="148.0" text="Save changes">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -1165,16 +1161,15 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutY="-1.0" prefHeight="660.0" prefWidth="1000.0">
+                        <TableView fx:id="scheduledTable" layoutY="-1.0" prefHeight="660.0" prefWidth="1000.0">
                            <columns>
-                              <TableColumn text="Week nr" />
-                              <TableColumn prefWidth="85.0" text="Monday" />
-                              <TableColumn prefWidth="112.0" text="Tuesday" />
-                              <TableColumn prefWidth="137.0" text="Wednesday" />
-                              <TableColumn prefWidth="150.0" text="Thursday" />
-                              <TableColumn prefWidth="158.0" text="Friday" />
-                              <TableColumn prefWidth="148.0" text="Friday" />
-                              <TableColumn prefWidth="129.0" text="Saturday" />
+                              <TableColumn fx:id="weekNrTableTab" text="Week nr" />
+                              <TableColumn fx:id="MondayTableTab" prefWidth="85.0" text="Monday" />
+                              <TableColumn fx:id="TuesdayTableTab" prefWidth="112.0" text="Tuesday" />
+                              <TableColumn fx:id="WednesdayTableTab" prefWidth="137.0" text="Wednesday" />
+                              <TableColumn fx:id="ThursdayTableTab" prefWidth="150.0" text="Thursday" />
+                              <TableColumn fx:id="FridayTableTab" prefWidth="158.0" text="Friday" />
+                              <TableColumn fx:id="SaturdayTableTab" prefWidth="277.0" text="Saturday" />
                            </columns>
                         </TableView>
                      </children>
