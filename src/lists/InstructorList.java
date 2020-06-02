@@ -15,6 +15,10 @@ public class InstructorList implements Serializable
     instructors = new ArrayList<Instructor>();
     lastID = 0;
   }
+  public ArrayList<Instructor> getList()
+  {
+    return instructors;
+  }
   public int size()
   {
     return instructors.size();
@@ -35,6 +39,23 @@ public class InstructorList implements Serializable
   {
     if(indexOfPhoneNumber(phone)!=-1) return instructors.get(indexOfPhoneNumber(phone));
     return null;
+  }
+  public Instructor getInstructorByName(String name)
+  {
+    for(int i=0;i<instructors.size();i++)
+    {
+      if(instructors.get(i).getName().equals(name)) return instructors.get(i);
+    }
+    return null;
+  }
+  public ArrayList<String> getInstructorsArray()
+  {
+    ArrayList<String> instructorsArray = new ArrayList<String>();
+    for(int i=0;i<instructorsArray.size();i++)
+    {
+      instructorsArray.add(instructors.get(i).getName());
+    }
+    return instructorsArray;
   }
   public void addInstructor(Instructor instructor)
   {

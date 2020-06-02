@@ -197,6 +197,10 @@ public class Controller
     showMemberField.setEditable(false);
     showInstructorField.setEditable(false);
     disableEditTabs();
+    ArrayList<String> toAdd = instructors.getAllInstructors().getInstructorsArray();
+    System.out.println(toAdd);
+    ObservableList<String> instructorDropBox = FXCollections.observableArrayList(toAdd);
+    allInstructorsAddGroup.setItems(instructorDropBox);
     updateAllMembersTable();
     updateAllGroupsTable();
 
@@ -257,18 +261,28 @@ public class Controller
     showMemberField.setText(editedMember.getName()+" "+editedMember.getPhone());
   }
 
-  public void editMember(ActionEvent actionEvent)
+  public void editMemberTable(ActionEvent actionEvent)
   {
-    if(allMembersTable.getSelectionModel().getSelectedItem()!=null)
-    {
-      editedMember =allMembersTable.getSelectionModel().getSelectedItem();
-    }
+
+    editedMember =allMembersTable.getSelectionModel().getSelectedItem();
     memberNameFieldEdit.setText(editedMember.getName());
     memberAddressEdit.setText(editedMember.getAddress());
     memberPhoneEdit.setText(editedMember.getPhone()+"");
     memberEmailEdit.setText(editedMember.getEmail());
     memberPremiumEdit.setSelected(editedMember.isPremiumMember());
     
+    membersTabPane.getSelectionModel().select(editMemberTab);
+    enableEditTabs();
+  }
+  public void editMemberSearch(ActionEvent actionEvent)
+  {
+    editedMember = membersEdited.getMemberByPhone(Integer.parseInt(searchMemberPhoneField.getText().trim()));
+    memberNameFieldEdit.setText(editedMember.getName());
+    memberAddressEdit.setText(editedMember.getAddress());
+    memberPhoneEdit.setText(editedMember.getPhone()+"");
+    memberEmailEdit.setText(editedMember.getEmail());
+    memberPremiumEdit.setSelected(editedMember.isPremiumMember());
+
     membersTabPane.getSelectionModel().select(editMemberTab);
     enableEditTabs();
   }
