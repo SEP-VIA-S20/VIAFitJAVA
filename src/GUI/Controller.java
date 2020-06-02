@@ -384,7 +384,7 @@ public class Controller
     instructorEmailEdit.setText(editedInstructor.getEmail());
     instructorDescriptionEdit.setText(editedInstructor.getDescription());
 
-    membersTabPane.getSelectionModel().select(editMemberTab);
+    instructorsTabPane.getSelectionModel().select(editInstructorTab);
     enableEditTabs();
 
   }
@@ -398,8 +398,8 @@ public class Controller
     instructorEmailEdit.setText(editedInstructor.getEmail());
     instructorDescriptionEdit.setText(editedInstructor.getDescription());
 
-//    instructorsTab.getSelectionModel().select(editInstructorTab);
-//    enableEditTabs();
+    instructorsTabPane.getSelectionModel().select(editInstructorTab);
+    enableEditTabs();
 
   }
   public void addInstructor(ActionEvent actionEvent)
@@ -417,10 +417,20 @@ public class Controller
 
   public void deleteInstructor(ActionEvent actionEvent)
   {
+    instructors.deleteInstructor(allInstructorsTable.getSelectionModel().getSelectedItem());
+    setStatus(4);
+    updateAllInstructorsTable();
   }
 
   public void saveEditedInstructor(ActionEvent actionEvent)
   {
+    instructorsEdited = instructors.getAllInstructors();
+    Instructor toAdd = new Instructor(instructorNameFieldEdit.getText(),instructorAddressEdit.getText(),Integer.parseInt(instructorPhoneEdit.getText()),instructorEmailEdit.getText(),editedInstructor.getID(),instructorDescriptionEdit.getText());
+    instructorsEdited.setInstructor(instructorsEdited.indexOfPhoneNumber(editedInstructor.getPhone()),toAdd);
+    instructors.saveInstructors(instructorsEdited);
+    setStatus(2);
+    updateAllInstructorsTable();
+    disableEditTabs();
   }
 
   public void scheduleClass(ActionEvent actionEvent)
