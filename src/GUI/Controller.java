@@ -407,6 +407,7 @@ public class Controller
 
     instructorsTabPane.getSelectionModel().select(editInstructorTab);
     enableEditTabs();
+    updateGroupInstructors();
 
   }
 
@@ -421,6 +422,7 @@ public class Controller
 
     instructorsTabPane.getSelectionModel().select(editInstructorTab);
     enableEditTabs();
+    updateGroupInstructors();
 
   }
   public void addInstructor(ActionEvent actionEvent)
@@ -434,6 +436,7 @@ public class Controller
     instructors.addInstructor(created);
     setStatus(3);
     updateAllInstructorsTable();
+    updateGroupInstructors();
   }
 
   public void deleteInstructor(ActionEvent actionEvent)
@@ -441,6 +444,7 @@ public class Controller
     instructors.deleteInstructor(allInstructorsTable.getSelectionModel().getSelectedItem());
     setStatus(4);
     updateAllInstructorsTable();
+    updateGroupInstructors();
   }
 
   public void saveEditedInstructor(ActionEvent actionEvent)

@@ -77,7 +77,7 @@ public class FileIO
       }
       catch (EOFException e)
       {
-        // done reading
+        System.out.println("Done reading");
       }
     }
     finally
