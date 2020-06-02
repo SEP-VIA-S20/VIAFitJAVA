@@ -51,7 +51,7 @@ public class InstructorList implements Serializable
   public ArrayList<String> getInstructorsArray()
   {
     ArrayList<String> instructorsArray = new ArrayList<String>();
-    for(int i=0;i<instructorsArray.size();i++)
+    for(int i=0;i<instructors.size();i++)
     {
       instructorsArray.add(instructors.get(i).getName());
     }

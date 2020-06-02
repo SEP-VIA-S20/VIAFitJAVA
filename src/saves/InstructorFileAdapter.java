@@ -136,6 +136,7 @@ public class InstructorFileAdapter
         "src/data/instructor.bin");
     data.importCSV("src/data/instructors.csv");
     System.out.println(data.getAllInstructors());
+    System.out.println(data.getAllInstructors().getInstructorsArray());
 
   }
 }

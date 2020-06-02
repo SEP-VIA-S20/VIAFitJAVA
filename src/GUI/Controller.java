@@ -197,9 +197,7 @@ public class Controller
     showMemberField.setEditable(false);
     showInstructorField.setEditable(false);
     disableEditTabs();
-    ArrayList<String> toAdd = instructors.getAllInstructors().getInstructorsArray();
-    System.out.println(toAdd);
-    ObservableList<String> instructorDropBox = FXCollections.observableArrayList(toAdd);
+    ObservableList<String> instructorDropBox = FXCollections.observableArrayList(instructors.getAllInstructors().getInstructorsArray());
     allInstructorsAddGroup.setItems(instructorDropBox);
     updateAllMembersTable();
     updateAllGroupsTable();
