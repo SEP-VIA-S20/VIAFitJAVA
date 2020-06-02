@@ -34,7 +34,7 @@
                                           <TextField fx:id="searchMemberPhoneField" layoutX="102.0" layoutY="224.0" prefHeight="70.0" />
                                           <Button layoutX="875.0" layoutY="8.0" mnemonicParsing="false" onAction="#addToGroupSearched" prefHeight="25.0" prefWidth="125.0" text="Add to Group" />
                                           <Button layoutX="104.0" layoutY="318.0" mnemonicParsing="false" onAction="#searchMember" prefHeight="37.0" prefWidth="197.0" text="Search" />
-                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" onAction="#editMember" prefHeight="25.0" prefWidth="57.0" text="Edit" />
+                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" onAction="#editMemberSearch" prefHeight="25.0" prefWidth="57.0" text="Edit" />
                                           <Label layoutX="178.0" layoutY="165.0" prefHeight="25.0" prefWidth="49.0" text="Phone" />
                                           <TextField fx:id="showMemberField" layoutX="516.0" layoutY="224.0" prefHeight="70.0" prefWidth="309.0">
                                              <font>
@@ -177,7 +177,7 @@
                                             </columns>
                                           </TableView>
                                           <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteMember" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editMember" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editMemberTable" prefHeight="30.0" prefWidth="85.0" text="Edit" />
                                        </children>
                                     </AnchorPane>
                                  </content>
