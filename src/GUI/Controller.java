@@ -356,8 +356,8 @@ public class Controller
     instructorEmailEdit.setText(editedInstructor.getEmail());
     instructorDescriptionEdit.setText(editedInstructor.getDescription());
 
-    membersTabPane.getSelectionModel().select(editMemberTab);
-    enableEditTabs();
+//    instructorsTab.getSelectionModel().select(editInstructorTab);
+//    enableEditTabs();
 
   }
   public void addInstructor(ActionEvent actionEvent)
