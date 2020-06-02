@@ -50,7 +50,11 @@ public class Group implements Serializable
 
   @Override public String toString()
   {
-    return "[ Class "+name+" | Limit : "+maxLimit+" | Instructor: "+instructor.toString()+" ]";
+   if(instructor!=null)
+   {
+     return "[ Class "+name+" | Limit : "+maxLimit+" | Instructor: "+instructor.toString()+" ]";
+   }
+    return "[ Class "+name+" | Limit : "+maxLimit+" | No Instructor ]";
   }
 
   @Override public boolean equals(Object obj)

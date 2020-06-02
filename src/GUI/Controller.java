@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -142,6 +143,7 @@ public class Controller
   //Scheduled group
   @FXML private Tab scheduleAGroupTab;
 
+  @FXML private ComboBox allGroupsScheduleCombo;
   @FXML private TextField scheduleGroupName;
   @FXML private TextField scheduleGroupMaxAttendants;
   @FXML private TextField scheduleGroupHour;
@@ -195,11 +197,17 @@ public class Controller
     statusTab.setDisable(true);
     showMemberField.setEditable(false);
     showInstructorField.setEditable(false);
+
+
+
     disableEditTabs();
     updateGroupInstructors();
     updateAllMembersTable();
     updateAllGroupsTable();
     updateAllInstructorsTable();
+    updateAllGroupsCombo();
+
+    allInstructorsAddGroup.getSelectionModel().select("Select Instructor");
 
 
   }
@@ -248,7 +256,6 @@ public class Controller
 
   public void addToGroupSearched(ActionEvent actionEvent)
   {
-
   }
 
   public void searchMember(ActionEvent actionEvent)
@@ -284,17 +291,6 @@ public class Controller
     enableEditTabs();
   }
 
-  public void saveEditedMember(ActionEvent actionEvent)
-  {
-    membersEdited = members.getAllMembers();
-    Member toAdd = new Member(memberNameFieldEdit.getText(),memberAddressEdit.getText(),Integer.parseInt(memberPhoneEdit.getText()),memberEmailEdit.getText(),editedMember.getID(),memberPremiumEdit.isSelected());
-    membersEdited.setMember(membersEdited.indexOfPhoneNumber(editedMember.getPhone()),toAdd);
-    members.saveMembers(membersEdited);
-    setStatus(2);
-    updateAllMembersTable();
-    disableEditTabs();
-  }
-
   public void addMember(ActionEvent actionEvent)
   {
 
@@ -311,22 +307,64 @@ public class Controller
 
   public void deleteMember(ActionEvent actionEvent)
   {
+    members.deleteMembers(allMembersTable.getSelectionModel().getSelectedItem());
+    setStatus(4);
+    updateAllMembersTable();
   }
 
   public void deleteGroup(ActionEvent actionEvent)
   {
+    groups.deleteGroup(allGroupsTable.getSelectionModel().getSelectedItem());
+    setStatus(4);
+    updateAllGroupsTable();
   }
 
   public void editGroup(ActionEvent actionEvent)
   {
+    editedGroup = allGroupsTable.getSelectionModel().getSelectedItem();
+    groupNameEdit.setText(editedGroup.getName());
+    allInstructorsEditGroup.getSelectionModel().select(instructors.getAllInstructors().getIndex(editedGroup.getInstructor()));
+    maxAttendantsEdit.setText(editedGroup.getMaxLimit()+"");
+    groupTabPane.getSelectionModel().select(editGroupTab);
+    enableEditTabs();
   }
 
   public void addGroup(ActionEvent actionEvent)
   {
+    instructorsEdited = instructors.getAllInstructors();
+    Group groupToAdd = new Group(groupNameAdd.getText(),Integer.parseInt(maxAttendantsAdd.getText()),instructorsEdited.getInstructorByName((String)allInstructorsAddGroup.getSelectionModel().getSelectedItem()));
+    groups.addGroup(groupToAdd);
+    setStatus(3);
+    updateAllGroupsTable();
+    groupTabPane.getSelectionModel().select(allGroupsTab);
+    groupNameAdd.setText("");
+    allInstructorsAddGroup.getSelectionModel().select("Select Instructor");
+    maxAttendantsAdd.setText("");
   }
 
   public void saveEditedGroup(ActionEvent actionEvent)
   {
+    String groupName = editedGroup.getName();
+    Group groupToEdit = new Group(groupNameEdit.getText(),Integer.parseInt(maxAttendantsEdit.getText().trim()),instructors.getAllInstructors().getInstructorByName((String)allInstructorsEditGroup.getSelectionModel().getSelectedItem()));
+    groupsEdited = groups.getAllGroups();
+    groupsEdited.setGroup(groups.getAllGroups().getIndexOfName(groupName),groupToEdit);
+    groups.saveGroup(groupsEdited);
+    disableEditTabs();
+    updateAllGroupsTable();
+    setStatus(2);
+    groupTabPane.getSelectionModel().select(allGroupsTab);
+    updateAllGroupsTable();
+  }
+
+  public void saveEditedMember(ActionEvent actionEvent)
+  {
+    membersEdited = members.getAllMembers();
+    Member toAdd = new Member(memberNameFieldEdit.getText(),memberAddressEdit.getText(),Integer.parseInt(memberPhoneEdit.getText()),memberEmailEdit.getText(),editedMember.getID(),memberPremiumEdit.isSelected());
+    membersEdited.setMember(membersEdited.indexOfPhoneNumber(editedMember.getPhone()),toAdd);
+    members.saveMembers(membersEdited);
+    setStatus(2);
+    updateAllMembersTable();
+    disableEditTabs();
   }
 
   public void searchInstructor(ActionEvent actionEvent)
@@ -339,14 +377,16 @@ public class Controller
 
   public void editInstructorTable(ActionEvent actionEvent)
   {
-    editedInstructor =allInstructorsTable.getSelectionModel().getSelectedItem();
+    editedInstructor = instructorsEdited.getInstructorByPhone(Integer.parseInt(searchInstructorPhoneField.getText().trim()));
     instructorNameFieldEdit.setText(editedInstructor.getName());
     instructorAddressEdit.setText(editedInstructor.getAddress());
     instructorPhoneEdit.setText(editedInstructor.getPhone()+"");
     instructorEmailEdit.setText(editedInstructor.getEmail());
     instructorDescriptionEdit.setText(editedInstructor.getDescription());
-    instructorsTabPane.getSelectionModel().select(editInstructorTab);
+
+    membersTabPane.getSelectionModel().select(editMemberTab);
     enableEditTabs();
+
   }
 
   public void editInstructorSearch(ActionEvent actionEvent)
@@ -358,8 +398,8 @@ public class Controller
     instructorEmailEdit.setText(editedInstructor.getEmail());
     instructorDescriptionEdit.setText(editedInstructor.getDescription());
 
-    instructorsTabPane.getSelectionModel().select(editInstructorTab);
-    enableEditTabs();
+//    instructorsTab.getSelectionModel().select(editInstructorTab);
+//    enableEditTabs();
 
   }
   public void addInstructor(ActionEvent actionEvent)
@@ -373,35 +413,18 @@ public class Controller
     instructors.addInstructor(created);
     setStatus(3);
     updateAllInstructorsTable();
-    updateAllGroupsTable();
   }
 
   public void deleteInstructor(ActionEvent actionEvent)
   {
-    instructors.deleteInstructor(allInstructorsTable.getSelectionModel().getSelectedItem());
-    setStatus(4);
-    updateAllInstructorsTable();
   }
 
   public void saveEditedInstructor(ActionEvent actionEvent)
   {
-    instructorsEdited = instructors.getAllInstructors();
-    Instructor toAdd = new Instructor(instructorNameFieldEdit.getText(),instructorAddressEdit.getText(),Integer.parseInt(instructorPhoneEdit.getText()),instructorEmailEdit.getText(),editedInstructor.getID(),instructorDescriptionEdit.getText());
-    instructorsEdited.setInstructor(instructorsEdited.indexOfPhoneNumber(editedInstructor.getPhone()),toAdd);
-    instructors.saveInstructors(instructorsEdited);
-    setStatus(2);
-    updateAllInstructorsTable();
-    disableEditTabs();
-    updateAllGroupsTable();
   }
 
   public void scheduleClass(ActionEvent actionEvent)
   {
-    int hour = Integer.parseInt(scheduleGroupHour.getText());
-    int minute = Integer.parseInt(scheduleGroupMinutes.getText());
-
-
-
   }
 
   public void deleteScheduledGroup(ActionEvent actionEvent)
@@ -418,7 +441,15 @@ public class Controller
 
   public void saveEditedScheduledGroup(ActionEvent actionEvent)
   {
+  }
+  public void bookGroup(ActionEvent event)
+  {
 
+  }
+
+  public void updateScheduleGroupFields(ActionEvent event)
+  {
+    System.out.println("changed");
   }
   public void updateAllMembersTable()
   {
@@ -459,6 +490,9 @@ public class Controller
     allInstructorsEditGroup.setItems(instructorDropBox);
     allInstructorsAddGroup.setItems(instructorDropBox);
   }
-
-
+  public void updateAllGroupsCombo()
+  {
+    ObservableList<String> groupsCombo = FXCollections.observableArrayList(groups.getAllGroups().getStringArray());
+    allGroupsScheduleCombo.setItems(groupsCombo);
+  }
 }
