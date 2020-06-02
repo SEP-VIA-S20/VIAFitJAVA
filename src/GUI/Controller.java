@@ -44,6 +44,10 @@ public class Controller
   @FXML private Tab statusTab;
   @FXML private TabPane mainTabPane;
   @FXML private TabPane membersTabPane;
+  @FXML private TabPane instructorsTabPane;
+  @FXML private TabPane groupTabPane;
+  @FXML private TabPane scheduledGroupTabPane;
+
   //Main Tabs
   @FXML private Tab membersTab;
   @FXML private Tab groupsTab;
@@ -394,5 +398,13 @@ public class Controller
     ObservableList<String> instructorDropBox = FXCollections.observableArrayList(instructors.getAllInstructors().getInstructorsArray());
     allInstructorsEditGroup.setItems(instructorDropBox);
     allInstructorsAddGroup.setItems(instructorDropBox);
+  }
+
+  public void editInstructorTable(ActionEvent actionEvent)
+  {
+  }
+
+  public void editInstructorSearch(ActionEvent actionEvent)
+  {
   }
 }
