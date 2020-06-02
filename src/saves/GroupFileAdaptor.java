@@ -86,10 +86,10 @@ public class GroupFileAdaptor
   public static void main(String[] args)
   {
     GroupFileAdaptor f1 = new GroupFileAdaptor("src/data/groups.bin");
-//    Instructor paul = new Instructor("Paul","Gers",21931,"g@mail.com",0,"Professional killer");
-//    f1.addGroup(new Group("Jogging",20,paul));
-//    f1.addGroup(new Group("ABS",15,paul));
-//    f1.addGroup(new Group("Pilates",10,paul));
+    Instructor paul = new Instructor("Paul","Gers",21931,"g@mail.com",0,"Professional killer");
+    f1.addGroup(new Group("Jogging",20,paul));
+    f1.addGroup(new Group("ABS",15,paul));
+    f1.addGroup(new Group("Pilates",10,paul));
     System.out.println(f1.getAllGroups());
 
   }

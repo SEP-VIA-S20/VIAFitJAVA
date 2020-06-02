@@ -35,7 +35,26 @@ public class GroupList implements Serializable
   {
     groups.remove(index);
   }
-
+  public int getIndexOfName(String name)
+  {
+    for (int i = 0; i < groups.size(); i++)
+    {
+      if (groups.get(i).getName().equals(name))
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+  public ArrayList<String> getStringArray()
+  {
+    ArrayList<String> returned = new ArrayList<String>();
+    for(int i=0;i<groups.size();i++)
+    {
+      returned.add(groups.get(i).getName());
+    }
+    return returned;
+  }
   @Override public String toString()
   {
     String returned = "Groups: ";
@@ -45,7 +64,10 @@ public class GroupList implements Serializable
     }
     return returned;
   }
-
+  public void setGroup(int index, Group group)
+  {
+    groups.set(index,group);
+  }
   public ArrayList<Group> getList()
   {
     return groups;

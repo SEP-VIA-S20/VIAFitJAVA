@@ -81,4 +81,19 @@ public class InstructorList implements Serializable
     }
     return returned;
   }
+  public int getInstructorIndexByName(String name)
+  {
+    return indexOfPhoneNumber(getInstructorIndexByName(name));
+  }
+  public int getIndex(Instructor instructor)
+  {
+    for (int i = 0; i < instructors.size(); i++)
+    {
+      if (instructors.get(i).equals(instructor))
+      {
+        return i;
+      }
+    }
+    return 0;
+  }
 }
