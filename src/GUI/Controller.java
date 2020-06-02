@@ -320,14 +320,28 @@ public class Controller
 
   public void searchInstructor(ActionEvent actionEvent)
   {
+    instructorsEdited = instructors.getAllInstructors();
+    int phone = Integer.parseInt(searchInstructorPhoneField.getText().trim());
+    editedInstructor = instructorsEdited.getInstructorByPhone(phone);
+    showInstructorField.setText(editedInstructor.getName()+" "+editedInstructor.getPhone());
   }
 
   public void editInstructor(ActionEvent actionEvent)
   {
+
   }
 
   public void addInstructor(ActionEvent actionEvent)
   {
+    String name = instructorNameFieldAdd.getText();
+    String address = instructorAddressAdd.getText();
+    int phone = Integer.parseInt(instructorPhoneAdd.getText());
+    String email = instructorEmailAdd.getText();
+    String description = instructorDescriptionAdd.getText();
+    Instructor created = new Instructor(name,address,phone,email,0,description);
+    instructors.addInstructor(created);
+    setStatus(3);
+    updateAllMembersTable();
   }
 
   public void deleteInstructor(ActionEvent actionEvent)
@@ -377,5 +391,18 @@ public class Controller
     ArrayList<Group> groupArr = groups.getAllGroups().getList();
     ObservableList<Group> observableGroups = FXCollections.observableArrayList(groupArr);
     allGroupsTable.setItems(observableGroups);
+  }
+
+  public void updateAllInstructorsTable()
+  {
+    allInstructorsFullName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    allInstructorsAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+    allInstructorsPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+    allInstructorsEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+    allInstructorsID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+    allInstructorsDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+//    ArrayList<Instructor> tempArr = instructors.getAllInstructors().getList();
+//    ObservableList<Instructor> temp = FXCollections.observableArrayList(tempArr);
+//    allMembersTable.setItems(temp);
   }
 }
