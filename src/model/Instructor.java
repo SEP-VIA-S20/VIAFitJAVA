@@ -34,6 +34,7 @@ public class Instructor extends Person implements Serializable
     return instructor.toString().equals(toString());
   }
 
+
 //  public static void main(String[] args)
 //  {
 //    Instructor DEN = new Instructor("DEN","STRAND",31,"GERSDOR",2001,"none");
