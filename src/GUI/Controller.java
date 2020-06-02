@@ -9,6 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lists.GroupList;
+import lists.InstructorList;
+import lists.MemberList;
+import lists.WeekList;
 import model.*;
 import org.w3c.dom.Text;
 import saves.GroupFileAdaptor;
@@ -22,28 +26,38 @@ public class Controller
  MemberFileAdapter members = null;
  InstructorFileAdapter instructors = null;
  GroupFileAdaptor groups = null;
+ 
+ Member editedMember=null;
+ Instructor editedInstructor=null;
+ Group editedGroup = null;
+ ScheduledGroup editedScheduledGroup = null;
+
+  MemberList membersEdited;
+  InstructorList instructorsEdited;
+  GroupList groupsEdited;
+  WeekList scheduledEdited;
   //Event listeners to add
   //search by phone
   //Add to group after search
   //Edit member
   //add member
   @FXML private Tab statusTab;
-//  @FXML private TabPane mainTabPane;
-//  @FXML private TabPane membersTabPane;
+  @FXML private TabPane mainTabPane;
+  @FXML private TabPane membersTabPane;
   //Main Tabs
-//  @FXML private Tab membersTab;
-//  @FXML private Tab groupsTab;
-//  @FXML private Tab instructorsTab;
-//  @FXML private Tab scheduleGroupTab;
-//  @FXML private Tab scheduleTab;
+  @FXML private Tab membersTab;
+  @FXML private Tab groupsTab;
+  @FXML private Tab instructorsTab;
+  @FXML private Tab scheduleGroupTab;
+  @FXML private Tab scheduleTab;
 
   //Members
-//  @FXML private Tab searchMemberTab;
+  @FXML private Tab searchMemberTab;
   //cont
   @FXML private TextField searchMemberPhoneField;
   @FXML private TextField showMemberField;
 
-//  @FXML private Tab addMemberTab;
+  @FXML private Tab addMemberTab;
   //
   @FXML private TextField memberNameFieldAdd;
   @FXML private TextField memberAddressAdd;
@@ -51,7 +65,7 @@ public class Controller
   @FXML private TextField memberEmailAdd;
   @FXML private CheckBox memberPremiumAdd;
 
-//  @FXML private Tab allMembersTab;
+  @FXML private Tab allMembersTab;
   //cont
   @FXML private TableView<Member> allMembersTable;
   @FXML private TableColumn<Member,String> allMembersID;
@@ -62,7 +76,7 @@ public class Controller
   @FXML private TableColumn<Member, String> allMembersMembership;
 
 
-//  @FXML private Tab editMemberTab;
+  @FXML private Tab editMemberTab;
   //content
   @FXML private TextField memberNameFieldEdit;
   @FXML private TextField memberAddressEdit;
@@ -71,27 +85,27 @@ public class Controller
   @FXML private CheckBox memberPremiumEdit;
 
   //Groups
-//  @FXML private Tab allGroupsTab;
+  @FXML private Tab allGroupsTab;
   //cont
   @FXML private TableView<Group> allGroupsTable;
   @FXML private TableColumn<Group,String> allGroupsName;
   @FXML private TableColumn<Group,String > allGroupsInstructor;
   @FXML private TableColumn<Group,String> allGroupsMaxAttendants;
   
-//  @FXML private Tab addGroupTab;
+  @FXML private Tab addGroupTab;
   //cont
   @FXML private TextField groupNameAdd;
   @FXML private TextField maxAttendantsAdd;
   @FXML private ComboBox allInstructorsAddGroup;
 
-//  @FXML private Tab editGroupTab;
+  @FXML private Tab editGroupTab;
   //cont
   @FXML private TextField groupNameEdit;
   @FXML private TextField maxAttendantsEdit;
   @FXML private ComboBox allInstructorsEditGroup;
 
   //Instructors
-  //  @FXML private Tab addInstructorTab;
+    @FXML private Tab addInstructorTab;
 
   @FXML private TextField searchInstructorPhoneField;
   @FXML private TextField showInstructorField;
@@ -102,7 +116,7 @@ public class Controller
   @FXML private TextField instructorEmailAdd;
   @FXML private TextArea instructorDescriptionAdd;
 
-  //  @FXML private Tab allInstructorsTab;
+    @FXML private Tab allInstructorsTab;
   //cont
   @FXML private TableView<Instructor> allInstructorsTable;
   @FXML private TableColumn<Instructor,String> allInstructorsID;
@@ -113,7 +127,7 @@ public class Controller
   @FXML private TableColumn<Instructor, String> allInstructorsDescription;
 
 
-  //  @FXML private Tab editInstructorTab;
+    @FXML private Tab editInstructorTab;
   //content
   @FXML private TextField instructorNameFieldEdit;
   @FXML private TextField instructorAddressEdit;
@@ -122,7 +136,8 @@ public class Controller
   @FXML private TextArea instructorDescriptionEdit;
 
   //Scheduled group
-//  @FXML private Tab scheduleAGroupTab;
+  @FXML private Tab scheduleAGroupTab;
+
   @FXML private TextField scheduleGroupName;
   @FXML private TextField scheduleGroupMaxAttendants;
   @FXML private TextField scheduleGroupHour;
@@ -130,7 +145,8 @@ public class Controller
   @FXML private ComboBox scheduleGroupInstructorsCombo;
   @FXML private DatePicker scheduleGroupDatePicker;
 
-//  @FXML private Tab allScheduledGroupsTab;
+  @FXML private Tab allScheduledGroupsTab;
+
   @FXML private TableView<ScheduledGroup> allScheduledGroupsTable;
   @FXML private TableColumn<ScheduledGroup,String> allScheduledGroupsName;
   @FXML private TableColumn<ScheduledGroup,String > allScheduledGroupsInstructor;
@@ -138,7 +154,8 @@ public class Controller
   @FXML private TableColumn<ScheduledGroup,String> allScheduledGroupsDate;
   @FXML private TableColumn<ScheduledGroup,String> allScheduledGroupsMembers;
 
-  //  @FXML private Tab addMemberToGroupTab;
+  @FXML private Tab addMemberToGroupTab;
+
   @FXML private TableView<Member> addMemberMemberTable;
   @FXML private TableColumn<Member,String> addMemberMemberName;
   @FXML private TableColumn<Member,String > addMemberMemberPhone;
@@ -146,7 +163,9 @@ public class Controller
   @FXML private TableView<ScheduledGroup> addMemberGroupTable;
   @FXML private TableColumn<ScheduledGroup,String> addMemberGroupName;
   @FXML private TableColumn<ScheduledGroup,String > addMemberSpaceLeft;
-//  @FXML private Tab editScheduledGroupTab;
+
+  @FXML private Tab editScheduledGroupTab;
+
   @FXML private TextField editScheduledGroupName;
   @FXML private TextField editScheduledGroupMaxAttendants;
   @FXML private TextField editScheduledGroupHour;
@@ -174,17 +193,28 @@ public class Controller
     groups = new GroupFileAdaptor("src/data/groups.bin");
     instructors = new InstructorFileAdapter("src/data/instructor.bin");
 
-    updateAllMembersTable();
     statusTab.setDisable(true);
+    showMemberField.setEditable(false);
+    showInstructorField.setEditable(false);
+    disableEditTabs();
+    updateAllMembersTable();
+    updateAllGroupsTable();
 
 
-    allGroupsName.setCellValueFactory(new PropertyValueFactory<>("name"));
-    allGroupsInstructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
-    allGroupsMaxAttendants.setCellValueFactory(new PropertyValueFactory<>("maxLimit"));
-    ArrayList<Group> groupArr = groups.getAllGroups().getList();
-    ObservableList<Group> observableGroups = FXCollections.observableArrayList(groupArr);
-    allGroupsTable.setItems(observableGroups);
-
+  }
+  public void disableEditTabs()
+  {
+    editMemberTab.setDisable(true);
+    editGroupTab.setDisable(true);
+    editInstructorTab.setDisable(true);
+    editScheduledGroupTab.setDisable(true);
+  }
+  public void enableEditTabs()
+  {
+    editMemberTab.setDisable(false);
+    editGroupTab.setDisable(false);
+    editInstructorTab.setDisable(false);
+    editScheduledGroupTab.setDisable(false);
   }
   public void setStatus()
   {
@@ -221,14 +251,37 @@ public class Controller
 
   public void searchMember(ActionEvent actionEvent)
   {
+    membersEdited = members.getAllMembers();
+    int phone = Integer.parseInt(searchMemberPhoneField.getText().trim());
+    editedMember = membersEdited.getMemberByPhone(phone);
+    showMemberField.setText(editedMember.getName()+" "+editedMember.getPhone());
   }
 
   public void editMember(ActionEvent actionEvent)
   {
+    if(allMembersTable.getSelectionModel().getSelectedItem()!=null)
+    {
+      editedMember =allMembersTable.getSelectionModel().getSelectedItem();
+    }
+    memberNameFieldEdit.setText(editedMember.getName());
+    memberAddressEdit.setText(editedMember.getAddress());
+    memberPhoneEdit.setText(editedMember.getPhone()+"");
+    memberEmailEdit.setText(editedMember.getEmail());
+    memberPremiumEdit.setSelected(editedMember.isPremiumMember());
+    
+    membersTabPane.getSelectionModel().select(editMemberTab);
+    enableEditTabs();
   }
 
   public void saveEditedMember(ActionEvent actionEvent)
   {
+    membersEdited = members.getAllMembers();
+    Member toAdd = new Member(memberNameFieldEdit.getText(),memberAddressEdit.getText(),Integer.parseInt(memberPhoneEdit.getText()),memberEmailEdit.getText(),editedMember.getID(),memberPremiumEdit.isSelected());
+    membersEdited.setMember(membersEdited.indexOfPhoneNumber(editedMember.getPhone()),toAdd);
+    members.saveMembers(membersEdited);
+    setStatus(2);
+    updateAllMembersTable();
+    disableEditTabs();
   }
 
   public void addMember(ActionEvent actionEvent)
@@ -315,5 +368,14 @@ public class Controller
     ArrayList<Member> tempArr = members.getAllMembers().getList();
     ObservableList<Member> temp = FXCollections.observableArrayList(tempArr);
     allMembersTable.setItems(temp);
+  }
+  public void updateAllGroupsTable()
+  {
+    allGroupsName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    allGroupsInstructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
+    allGroupsMaxAttendants.setCellValueFactory(new PropertyValueFactory<>("maxLimit"));
+    ArrayList<Group> groupArr = groups.getAllGroups().getList();
+    ObservableList<Group> observableGroups = FXCollections.observableArrayList(groupArr);
+    allGroupsTable.setItems(observableGroups);
   }
 }

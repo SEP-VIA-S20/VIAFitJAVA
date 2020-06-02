@@ -120,7 +120,7 @@ public class MemberFileAdapter
   public static void main(String[] args)
   {
     MemberFileAdapter members = new MemberFileAdapter("src/data/members.bin");
-//    members.importCSV("C:\\Users\\dd\\IdeaProjects\\VIAFitJAVA\\src\\data\\members.csv");
+    members.importCSV("src\\data\\members.csv");
     System.out.println(members.getAllMembers());
   }
 }

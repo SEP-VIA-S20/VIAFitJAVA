@@ -15,6 +15,10 @@ public class MemberList implements Serializable
     members = new ArrayList<Member>();
     lastID =0;
   }
+  public void setMember(int index,Member member)
+  {
+    members.set(index,member);
+  }
   public int size()
   {
     return members.size();

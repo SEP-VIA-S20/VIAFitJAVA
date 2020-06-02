@@ -182,7 +182,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab fx:id="editMemberTab" text="Edit Member">
+                              <Tab fx:id="editMemberTab" onSelectionChanged="#disableEditTabs" text="Edit Member">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="945.0">
                                        <children>
@@ -306,13 +306,13 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Groups">
+          <Tab fx:id="groupsTab" text="Groups">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TabPane prefHeight="658.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
-                            <Tab text="All groups">
+                            <Tab fx:id="allGroupsTab" text="All groups">
                                  <content>
                                     <AnchorPane>
                                        <children>
@@ -329,7 +329,7 @@
                                     </AnchorPane>
                                  </content>
                             </Tab>
-                            <Tab text="Add group">
+                            <Tab fx:id="addGroupTab" text="Add group">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="708.0">
                                        <children>
@@ -412,7 +412,7 @@
                                     </AnchorPane>
                                  </content>
                             </Tab>
-                              <Tab text="Edit group">
+                              <Tab fx:id="editGroupTab" onSelectionChanged="#disableEditTabs" text="Edit group">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="708.0">
                                        <children>
@@ -500,13 +500,13 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Instructors">
+            <Tab fx:id="instructorsTab" text="Instructors">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
                         <TabPane fx:id="membersTabPane1" prefHeight="660.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab fx:id="searchMemberTab1" onSelectionChanged="#handleClick" text="Search">
+                              <Tab onSelectionChanged="#handleClick" text="Search">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="1030.0">
                                        <children>
@@ -519,7 +519,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab fx:id="addMemberTab121" onSelectionChanged="#handleClick" text="Add Instructor">
+                              <Tab fx:id="addInstructorTab" onSelectionChanged="#handleClick" text="Add Instructor">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="945.0">
                                        <children>
@@ -627,7 +627,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab fx:id="allMembersTab1" onSelectionChanged="#handleClick" text="All Instructors">
+                              <Tab fx:id="allInstructorsTab" onSelectionChanged="#handleClick" text="All Instructors">
                                  <content>
                                     <AnchorPane>
                                        <children>
@@ -647,7 +647,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab onSelectionChanged="#handleClick" text="Edit Instructor">
+                              <Tab fx:id="editInstructorTab" onSelectionChanged="#disableEditTabs" text="Edit Instructor">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="945.0">
                                        <children>
@@ -761,13 +761,13 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Schedule group">
+            <Tab fx:id="scheduleAGroupTab" text="Schedule group">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TabPane prefHeight="659.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab text="Schedule a group">
+                              <Tab fx:id="scheduleGroupTab" text="Schedule a group">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -884,7 +884,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab text="All scheduled groups">
+                              <Tab fx:id="allScheduledGroupsTab" text="All scheduled groups">
                                  <content>
                                     <AnchorPane>
                                        <children>
@@ -903,7 +903,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab text="Add member to group">
+                              <Tab fx:id="addMemberToGroupTab" text="Add member to group">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -1035,7 +1035,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab text="Edit a scheduled group">
+                              <Tab fx:id="editScheduledGroupTab" onSelectionChanged="#disableEditTabs" text="Edit a scheduled group">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -1157,7 +1157,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Schedule">
+            <Tab fx:id="scheduleTab" text="Schedule">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
