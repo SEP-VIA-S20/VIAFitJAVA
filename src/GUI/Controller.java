@@ -197,8 +197,7 @@ public class Controller
     showMemberField.setEditable(false);
     showInstructorField.setEditable(false);
     disableEditTabs();
-    ObservableList<String> instructorDropBox = FXCollections.observableArrayList(instructors.getAllInstructors().getInstructorsArray());
-    allInstructorsAddGroup.setItems(instructorDropBox);
+    updateGroupInstructors();
     updateAllMembersTable();
     updateAllGroupsTable();
 
@@ -389,5 +388,11 @@ public class Controller
     ArrayList<Group> groupArr = groups.getAllGroups().getList();
     ObservableList<Group> observableGroups = FXCollections.observableArrayList(groupArr);
     allGroupsTable.setItems(observableGroups);
+  }
+  public void updateGroupInstructors()
+  {
+    ObservableList<String> instructorDropBox = FXCollections.observableArrayList(instructors.getAllInstructors().getInstructorsArray());
+    allInstructorsEditGroup.setItems(instructorDropBox);
+    allInstructorsAddGroup.setItems(instructorDropBox);
   }
 }
