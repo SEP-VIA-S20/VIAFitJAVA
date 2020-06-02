@@ -44,6 +44,10 @@ public class Controller
   @FXML private Tab statusTab;
   @FXML private TabPane mainTabPane;
   @FXML private TabPane membersTabPane;
+  @FXML private TabPane instructorsTabPane;
+  @FXML private TabPane groupTabPane;
+  @FXML private TabPane scheduledGroupTabPane;
+
   //Main Tabs
   @FXML private Tab membersTab;
   @FXML private Tab groupsTab;
@@ -192,8 +196,7 @@ public class Controller
     showMemberField.setEditable(false);
     showInstructorField.setEditable(false);
     disableEditTabs();
-    ObservableList<String> instructorDropBox = FXCollections.observableArrayList(instructors.getAllInstructors().getInstructorsArray());
-    allInstructorsAddGroup.setItems(instructorDropBox);
+    updateGroupInstructors();
     updateAllMembersTable();
     updateAllGroupsTable();
     updateAllInstructorsTable();
@@ -421,7 +424,6 @@ public class Controller
     ObservableList<Group> observableGroups = FXCollections.observableArrayList(groupArr);
     allGroupsTable.setItems(observableGroups);
   }
-
   public void updateAllInstructorsTable()
   {
     allInstructorsFullName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -433,5 +435,11 @@ public class Controller
     ArrayList<Instructor> tempArr = instructors.getAllInstructors().getList();
     ObservableList<Instructor> temp = FXCollections.observableArrayList(tempArr);
     allInstructorsTable.setItems(temp);
+  }
+  public void updateGroupInstructors()
+  {
+    ObservableList<String> instructorDropBox = FXCollections.observableArrayList(instructors.getAllInstructors().getInstructorsArray());
+    allInstructorsEditGroup.setItems(instructorDropBox);
+    allInstructorsAddGroup.setItems(instructorDropBox);
   }
 }

@@ -310,7 +310,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="658.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="groupTabPane" prefHeight="658.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab fx:id="allGroupsTab" text="All groups">
                                  <content>
@@ -504,7 +504,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <TabPane fx:id="membersTabPane1" prefHeight="660.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="instructorsTabPane" prefHeight="660.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
                               <Tab onSelectionChanged="#handleClick" text="Search">
                                  <content>
@@ -512,7 +512,7 @@
                                        <children>
                                           <TextField fx:id="searchInstructorPhoneField" layoutX="102.0" layoutY="224.0" prefHeight="70.0" />
                                           <Button layoutX="104.0" layoutY="318.0" mnemonicParsing="false" onAction="#searchInstructor" prefHeight="37.0" prefWidth="197.0" text="Search" />
-                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" onAction="#editInstructor" prefHeight="25.0" prefWidth="57.0" text="Edit" />
+                                          <Button layoutX="943.0" layoutY="52.0" mnemonicParsing="false" onAction="#editInstructorSearch" prefHeight="25.0" prefWidth="57.0" text="Edit" />
                                           <Label layoutX="178.0" layoutY="165.0" prefHeight="25.0" prefWidth="49.0" text="Phone" />
                                           <TextField fx:id="showInstructorField" layoutX="450.0" layoutY="228.0" prefHeight="65.0" prefWidth="201.0" />
                                        </children>
@@ -642,7 +642,7 @@
                                              </columns>
                                           </TableView>
                                           <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteInstructor" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editInstructor" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editInstructorTable" prefHeight="30.0" prefWidth="85.0" text="Edit" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -765,7 +765,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="659.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane fx:id="scheduledGroupTabPane" prefHeight="659.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
                               <Tab fx:id="scheduleGroupTab" text="Schedule a group">
                                  <content>
