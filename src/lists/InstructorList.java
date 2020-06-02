@@ -81,4 +81,9 @@ public class InstructorList implements Serializable
     }
     return returned;
   }
+
+  public void setInstructor(int indexOfPhoneNumber, Instructor toAdd)
+  {
+    instructors.set(indexOfPhoneNumber, toAdd);
+  }
 }

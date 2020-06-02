@@ -241,13 +241,14 @@ public class Controller
     }
     else if(status ==4)
     {
-      resp="Added";
+      resp="Deleted";
     }else resp = "Status";
     statusTab.setText(resp);
   }
 
   public void addToGroupSearched(ActionEvent actionEvent)
   {
+
   }
 
   public void searchMember(ActionEvent actionEvent)
@@ -338,16 +339,14 @@ public class Controller
 
   public void editInstructorTable(ActionEvent actionEvent)
   {
-    editedInstructor = instructorsEdited.getInstructorByPhone(Integer.parseInt(searchInstructorPhoneField.getText().trim()));
+    editedInstructor =allInstructorsTable.getSelectionModel().getSelectedItem();
     instructorNameFieldEdit.setText(editedInstructor.getName());
     instructorAddressEdit.setText(editedInstructor.getAddress());
     instructorPhoneEdit.setText(editedInstructor.getPhone()+"");
     instructorEmailEdit.setText(editedInstructor.getEmail());
     instructorDescriptionEdit.setText(editedInstructor.getDescription());
-
-    membersTabPane.getSelectionModel().select(editMemberTab);
+    instructorsTabPane.getSelectionModel().select(editInstructorTab);
     enableEditTabs();
-
   }
 
   public void editInstructorSearch(ActionEvent actionEvent)
@@ -359,8 +358,8 @@ public class Controller
     instructorEmailEdit.setText(editedInstructor.getEmail());
     instructorDescriptionEdit.setText(editedInstructor.getDescription());
 
-//    instructorsTab.getSelectionModel().select(editInstructorTab);
-//    enableEditTabs();
+    instructorsTabPane.getSelectionModel().select(editInstructorTab);
+    enableEditTabs();
 
   }
   public void addInstructor(ActionEvent actionEvent)
@@ -374,18 +373,35 @@ public class Controller
     instructors.addInstructor(created);
     setStatus(3);
     updateAllInstructorsTable();
+    updateAllGroupsTable();
   }
 
   public void deleteInstructor(ActionEvent actionEvent)
   {
+    instructors.deleteInstructor(allInstructorsTable.getSelectionModel().getSelectedItem());
+    setStatus(4);
+    updateAllInstructorsTable();
   }
 
   public void saveEditedInstructor(ActionEvent actionEvent)
   {
+    instructorsEdited = instructors.getAllInstructors();
+    Instructor toAdd = new Instructor(instructorNameFieldEdit.getText(),instructorAddressEdit.getText(),Integer.parseInt(instructorPhoneEdit.getText()),instructorEmailEdit.getText(),editedInstructor.getID(),instructorDescriptionEdit.getText());
+    instructorsEdited.setInstructor(instructorsEdited.indexOfPhoneNumber(editedInstructor.getPhone()),toAdd);
+    instructors.saveInstructors(instructorsEdited);
+    setStatus(2);
+    updateAllInstructorsTable();
+    disableEditTabs();
+    updateAllGroupsTable();
   }
 
   public void scheduleClass(ActionEvent actionEvent)
   {
+    int hour = Integer.parseInt(scheduleGroupHour.getText());
+    int minute = Integer.parseInt(scheduleGroupMinutes.getText());
+
+
+
   }
 
   public void deleteScheduledGroup(ActionEvent actionEvent)
@@ -402,6 +418,7 @@ public class Controller
 
   public void saveEditedScheduledGroup(ActionEvent actionEvent)
   {
+
   }
   public void updateAllMembersTable()
   {
@@ -442,4 +459,6 @@ public class Controller
     allInstructorsEditGroup.setItems(instructorDropBox);
     allInstructorsAddGroup.setItems(instructorDropBox);
   }
+
+
 }

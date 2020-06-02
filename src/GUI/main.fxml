@@ -506,7 +506,7 @@
                      <children>
                         <TabPane fx:id="instructorsTabPane" prefHeight="660.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
-                              <Tab onSelectionChanged="#handleClick" text="Search">
+                              <Tab text="Search">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="310.0" prefWidth="1030.0">
                                        <children>
@@ -519,7 +519,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab fx:id="addInstructorTab" onSelectionChanged="#handleClick" text="Add Instructor">
+                              <Tab fx:id="addInstructorTab" text="Add Instructor">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="945.0">
                                        <children>
@@ -627,7 +627,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab fx:id="allInstructorsTab" onSelectionChanged="#handleClick" text="All Instructors">
+                              <Tab fx:id="allInstructorsTab" text="All Instructors">
                                  <content>
                                     <AnchorPane>
                                        <children>
@@ -1176,7 +1176,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="statusTab" onSelectionChanged="#handleClick" text="Status" />
+            <Tab fx:id="statusTab" text="Status" />
         </tabs>
       </TabPane>
    </children>
