@@ -64,6 +64,10 @@ public class MemberFileAdapter
   public void addMember(Member member)
   {
     MemberList members = getAllMembers();
+    if(members==null)
+    {
+      members = new MemberList();
+    }
     members.addMember(member);
     saveMembers(members);
   }

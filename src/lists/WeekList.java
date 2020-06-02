@@ -30,7 +30,6 @@ public class WeekList implements Serializable
   {
     weeks.add(week);
   }
-  public void addDay(){};
   public void addClass(ScheduledGroup group){
     int weekNumber = group.getTime().getWeekNumber();
     boolean contains = false;
@@ -55,6 +54,26 @@ public class WeekList implements Serializable
       weeks.add(toAdd);
     }
   };
+  public void removeClass(ScheduledGroup group)
+  {
+    for (int i = 0; i < weeks.size(); i++)
+    {
+      if (weeks.get(i).getDays().contains(group))
+      {
+        weeks.get(i).deleteScheduledGroup(group);
+      }
+      if (isEmpty())
+      {
+        weeks.remove(i);
+      }
+    }
+  }
+
+  public boolean isEmpty()
+  {
+    if(weeks.size()==0) return true;
+    return false;
+  }
   public void removeWeek(Week week)
   {
     weeks.remove(week);

@@ -141,8 +141,7 @@ public class Date implements Serializable
 
   public static void main(String[] args)
   {
-    Date d1 = new Date(30,5,2020);
-    System.out.println(d1);
+    Date d1 = new Date(2,6,2020);
     System.out.println(d1.getWeekNumber());
   }
 

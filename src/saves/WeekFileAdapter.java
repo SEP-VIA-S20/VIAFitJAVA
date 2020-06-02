@@ -1,6 +1,8 @@
 package saves;
 
 import lists.WeekList;
+import model.Group;
+import model.ScheduledGroup;
 import model.Week;
 
 import java.io.FileNotFoundException;
@@ -73,6 +75,22 @@ public class WeekFileAdapter
     saveWeeks(week);
   }
 
+  public void addScheduledGroup(ScheduledGroup group)
+  {
+    WeekList allWeeks = getAllWeeks();
+    if(allWeeks==null)
+    {
+      allWeeks = new WeekList();
+    }
+    allWeeks.addClass(group);
+    saveWeeks(allWeeks);
+  }
+
+  public void deleteScheduledGroup(ScheduledGroup group)
+  {
+    WeekList allWeeks = getAllWeeks();
+//    allWeeks.
+  }
   public void addWeeks(WeekList obj)
   {
     WeekList week = getAllWeeks();

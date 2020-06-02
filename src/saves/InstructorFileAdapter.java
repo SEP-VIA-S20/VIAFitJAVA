@@ -69,6 +69,10 @@ public class InstructorFileAdapter
   public void addInstructor(Instructor obj)
   {
     InstructorList instructor = getAllInstructors();
+    if(instructor==null)
+    {
+      instructor = new InstructorList();
+    }
     instructor.addInstructor(obj);
     saveInstructors(instructor);
   }
@@ -80,7 +84,7 @@ public class InstructorFileAdapter
     {
       instructor.addInstructor(obj.getInstructor(i));
     }
-
+    saveInstructors(instructor);
   }
 
   public void deleteInstructor(Instructor instructor)
