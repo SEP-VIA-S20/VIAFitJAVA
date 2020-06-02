@@ -182,11 +182,6 @@ public class Controller
   @FXML private TableColumn<Week,String > FridayTableTab;
   @FXML private TableColumn<Week,String > SaturdayTableTab;
 
-  public void handleClick(Event event)
-  {
-  }
-
-
   public void init()
   {
     members = new MemberFileAdapter("src/data/members.bin");
@@ -338,7 +333,7 @@ public class Controller
     showInstructorField.setText(editedInstructor.getName()+" "+editedInstructor.getPhone());
   }
 
-  public void editInstructor(ActionEvent actionEvent)
+  public void editInstructorTable(ActionEvent actionEvent)
   {
     editedInstructor = instructorsEdited.getInstructorByPhone(Integer.parseInt(searchInstructorPhoneField.getText().trim()));
     instructorNameFieldEdit.setText(editedInstructor.getName());
@@ -352,6 +347,19 @@ public class Controller
 
   }
 
+  public void editInstructorSearch(ActionEvent actionEvent)
+  {
+    editedInstructor = instructorsEdited.getInstructorByPhone(Integer.parseInt(searchInstructorPhoneField.getText().trim()));
+    instructorNameFieldEdit.setText(editedInstructor.getName());
+    instructorAddressEdit.setText(editedInstructor.getAddress());
+    instructorPhoneEdit.setText(editedInstructor.getPhone()+"");
+    instructorEmailEdit.setText(editedInstructor.getEmail());
+    instructorDescriptionEdit.setText(editedInstructor.getDescription());
+
+    membersTabPane.getSelectionModel().select(editMemberTab);
+    enableEditTabs();
+
+  }
   public void addInstructor(ActionEvent actionEvent)
   {
     String name = instructorNameFieldAdd.getText();
