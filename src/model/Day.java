@@ -19,7 +19,6 @@ public class Day implements Serializable
     this.classes = classes;
     this.date = date;
   }
-
   public void addGroup(ScheduledGroup group)
   {
     if (group.getTime().getDay()==date.getDay())
@@ -72,14 +71,31 @@ public class Day implements Serializable
     Day day = (Day)obj;
     return day.toString().equals(toString());
   }
+  public boolean isEmpty()
+  {
+    if(classes.size()==0) return true;
+    return false;
+  }
 
-//  public static void main(String[] args)
-//  {
-//    Day day1 = new Day(25);
-//    day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//    day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//    day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//    day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//    System.out.println(day1);
-//  }
+  public static void main(String[] args)
+  {
+    Day day1 = new Day(25);
+    ScheduledGroup test = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
+    ScheduledGroup test1 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
+    ScheduledGroup test2 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
+    ScheduledGroup test3 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
+    day1.addGroup(test);
+    day1.addGroup(test1);
+    day1.addGroup(test2);
+    day1.addGroup(test3);
+    System.out.println(day1);
+    System.out.println(day1.isEmpty());
+    day1.removeGroup(test);
+    day1.removeGroup(test1);
+    System.out.println(day1);
+    day1.removeGroup(test2);
+    day1.removeGroup(test3);
+    System.out.println(day1);
+    System.out.println(day1.isEmpty());
+  }
 }

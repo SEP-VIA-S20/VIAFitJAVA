@@ -48,6 +48,22 @@ public class Week implements Serializable
       days.add(toAdd);
     }
   }
+  public void deleteScheduledGroup(ScheduledGroup group)
+  {
+    for (int i = 0; i < days.size(); i++)
+    {
+      if (days.get(i).containsGroup(group))
+      {
+        Day temp = days.get(i);
+        temp.removeGroup(group);
+        days.set(i, temp);
+      }
+      if (days.get(i).isEmpty())
+      {
+        days.remove(i);
+      }
+    }
+  }
 
   public ArrayList<Day> getDays()
   {

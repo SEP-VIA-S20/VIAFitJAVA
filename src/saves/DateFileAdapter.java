@@ -80,6 +80,7 @@ public class DateFileAdapter
     {
       date.addDate(obj.getDate(i));
     }
+    saveDates(date);
   }
 
   public void deleteDate(Date date)

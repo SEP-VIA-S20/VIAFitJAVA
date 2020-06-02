@@ -19,7 +19,9 @@ import org.w3c.dom.Text;
 import saves.GroupFileAdaptor;
 import saves.InstructorFileAdapter;
 import saves.MemberFileAdapter;
+import saves.WeekFileAdapter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Controller
@@ -27,6 +29,7 @@ public class Controller
  MemberFileAdapter members = null;
  InstructorFileAdapter instructors = null;
  GroupFileAdaptor groups = null;
+ WeekFileAdapter weeks = null;
  
  Member editedMember=null;
  Instructor editedInstructor=null;
@@ -193,6 +196,7 @@ public class Controller
     members = new MemberFileAdapter("src/data/members.bin");
     groups = new GroupFileAdaptor("src/data/groups.bin");
     instructors = new InstructorFileAdapter("src/data/instructor.bin");
+    weeks = new WeekFileAdapter("src/data/scheduled.bin");
 
     statusTab.setDisable(true);
     showMemberField.setEditable(false);
@@ -201,11 +205,25 @@ public class Controller
 
 
     disableEditTabs();
-    updateGroupInstructors();
-    updateAllMembersTable();
-    updateAllGroupsTable();
-    updateAllInstructorsTable();
-    updateAllGroupsCombo();
+
+
+
+
+    if(members.getAllMembers()!=null)
+    {
+      updateAllMembersTable();
+    }
+    if(groups.getAllGroups()!=null)
+    {
+      updateAllGroupsTable();
+      updateAllGroupsCombo();
+    }
+    if(instructors.getAllInstructors()!=null)
+    {
+      updateAllInstructorsTable();
+      updateGroupInstructors();
+    }
+
 
     allInstructorsAddGroup.getSelectionModel().select("Select Instructor");
 
@@ -317,6 +335,7 @@ public class Controller
     groups.deleteGroup(allGroupsTable.getSelectionModel().getSelectedItem());
     setStatus(4);
     updateAllGroupsTable();
+    updateAllGroupsCombo();
   }
 
   public void editGroup(ActionEvent actionEvent)
@@ -340,6 +359,7 @@ public class Controller
     groupNameAdd.setText("");
     allInstructorsAddGroup.getSelectionModel().select("Select Instructor");
     maxAttendantsAdd.setText("");
+    updateAllGroupsCombo();
   }
 
   public void saveEditedGroup(ActionEvent actionEvent)
@@ -354,6 +374,7 @@ public class Controller
     setStatus(2);
     groupTabPane.getSelectionModel().select(allGroupsTab);
     updateAllGroupsTable();
+    updateAllGroupsCombo();
   }
 
   public void saveEditedMember(ActionEvent actionEvent)
@@ -433,8 +454,28 @@ public class Controller
     disableEditTabs();
   }
 
+  public void updateScheduleGroupFields(ActionEvent event)
+  {
+    Group temp = groups.getAllGroups().getGroup(groups.getAllGroups().getIndexOfName((String) allGroupsScheduleCombo.getSelectionModel().getSelectedItem()));
+    scheduleGroupName.setText(temp.getName());
+    scheduleGroupMaxAttendants.setText(temp.getMaxLimit()+"");
+    scheduleGroupInstructorsCombo.getSelectionModel().select(instructors.getAllInstructors().getIndex(temp.getInstructor()));
+  }
+
   public void scheduleClass(ActionEvent actionEvent)
   {
+    Group toAdd = new Group(scheduleGroupName.getText(),Integer.parseInt(scheduleGroupMaxAttendants.getText().trim()),instructors.getAllInstructors().getInstructorByName((String) scheduleGroupInstructorsCombo.getSelectionModel().getSelectedItem()));
+    LocalDate localDate = scheduleGroupDatePicker.getValue();
+    Date groupDate = new Date(localDate.getDayOfMonth(),localDate.getMonthValue(),localDate.getYear(),new Time(Integer.parseInt(scheduleGroupHour.getText().trim()),Integer.parseInt(scheduleGroupMinutes.getText().trim())));
+    ScheduledGroup groupToAdd = new ScheduledGroup(toAdd,groupDate);
+    groupsEdited = groups.getAllGroups();
+    if(!(groupsEdited.getIndexOfName(toAdd.getName())==-1))
+    {
+      groupsEdited.addGroup(toAdd);
+      groups.saveGroup(groupsEdited);
+    }
+    weeks.addScheduledGroup(groupToAdd);
+    System.out.println(weeks.getAllWeeks());
   }
 
   public void deleteScheduledGroup(ActionEvent actionEvent)
@@ -448,18 +489,13 @@ public class Controller
   public void addMemberToGroupTable(ActionEvent actionEvent)
   {
   }
-
   public void saveEditedScheduledGroup(ActionEvent actionEvent)
   {
   }
+
   public void bookGroup(ActionEvent event)
   {
 
-  }
-
-  public void updateScheduleGroupFields(ActionEvent event)
-  {
-    System.out.println("changed");
   }
   public void updateAllMembersTable()
   {
@@ -499,10 +535,13 @@ public class Controller
     ObservableList<String> instructorDropBox = FXCollections.observableArrayList(instructors.getAllInstructors().getInstructorsArray());
     allInstructorsEditGroup.setItems(instructorDropBox);
     allInstructorsAddGroup.setItems(instructorDropBox);
+    scheduleGroupInstructorsCombo.setItems(instructorDropBox);
+    editScheduledGroupInstructorsCombo.setItems(instructorDropBox);
   }
   public void updateAllGroupsCombo()
   {
     ObservableList<String> groupsCombo = FXCollections.observableArrayList(groups.getAllGroups().getStringArray());
     allGroupsScheduleCombo.setItems(groupsCombo);
+    editScheduledGroupInstructorsCombo.setItems(groupsCombo);
   }
 }

@@ -55,6 +55,10 @@ public class GroupList implements Serializable
     }
     return returned;
   }
+  public boolean hasGroup(Group group)
+  {
+    return groups.contains(group);
+  }
   @Override public String toString()
   {
     String returned = "Groups: ";

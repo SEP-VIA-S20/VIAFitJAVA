@@ -64,7 +64,7 @@ public class ScheduledGroup implements Serializable
 
   @Override public String toString()
   {
-    return group.toString()+" | Members: " + members;
+    return group.toString()+" | Time: "+time+" | Members: " + members;
   }
 
   @Override public boolean equals(Object obj)
