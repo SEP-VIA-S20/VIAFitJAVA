@@ -203,6 +203,7 @@ public class Controller
     allInstructorsAddGroup.setItems(instructorDropBox);
     updateAllMembersTable();
     updateAllGroupsTable();
+    updateAllInstructorsTable();
 
 
   }
@@ -263,7 +264,6 @@ public class Controller
 
   public void editMemberTable(ActionEvent actionEvent)
   {
-
     editedMember =allMembersTable.getSelectionModel().getSelectedItem();
     memberNameFieldEdit.setText(editedMember.getName());
     memberAddressEdit.setText(editedMember.getAddress());
@@ -342,6 +342,15 @@ public class Controller
 
   public void editInstructor(ActionEvent actionEvent)
   {
+    editedInstructor = instructorsEdited.getInstructorByPhone(Integer.parseInt(searchInstructorPhoneField.getText().trim()));
+    instructorNameFieldEdit.setText(editedInstructor.getName());
+    instructorAddressEdit.setText(editedInstructor.getAddress());
+    instructorPhoneEdit.setText(editedInstructor.getPhone()+"");
+    instructorEmailEdit.setText(editedInstructor.getEmail());
+    instructorDescriptionEdit.setText(editedInstructor.getDescription());
+
+    membersTabPane.getSelectionModel().select(editMemberTab);
+    enableEditTabs();
 
   }
 
@@ -355,7 +364,7 @@ public class Controller
     Instructor created = new Instructor(name,address,phone,email,0,description);
     instructors.addInstructor(created);
     setStatus(3);
-    updateAllMembersTable();
+    updateAllInstructorsTable();
   }
 
   public void deleteInstructor(ActionEvent actionEvent)
@@ -415,8 +424,8 @@ public class Controller
     allInstructorsEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     allInstructorsID.setCellValueFactory(new PropertyValueFactory<>("ID"));
     allInstructorsDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-//    ArrayList<Instructor> tempArr = instructors.getAllInstructors().getList();
-//    ObservableList<Instructor> temp = FXCollections.observableArrayList(tempArr);
-//    allMembersTable.setItems(temp);
+    ArrayList<Instructor> tempArr = instructors.getAllInstructors().getList();
+    ObservableList<Instructor> temp = FXCollections.observableArrayList(tempArr);
+    allInstructorsTable.setItems(temp);
   }
 }
