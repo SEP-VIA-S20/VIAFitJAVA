@@ -95,6 +95,7 @@ public class Date implements Serializable
     this.day = day;
     this.month = month;
     this.year = year;
+    this.time = new Time(0,0);
   }
 
   public Date copy()

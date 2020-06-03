@@ -89,7 +89,8 @@ public class WeekFileAdapter
   public void deleteScheduledGroup(ScheduledGroup group)
   {
     WeekList allWeeks = getAllWeeks();
-//    allWeeks.
+    allWeeks.removeClass(group);
+    saveWeeks(allWeeks);
   }
   public void addWeeks(WeekList obj)
   {

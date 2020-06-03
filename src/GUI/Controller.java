@@ -22,6 +22,8 @@ import saves.MemberFileAdapter;
 import saves.WeekFileAdapter;
 
 import java.time.LocalDate;
+import java.time.chrono.Chronology;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Controller
@@ -212,18 +214,23 @@ public class Controller
     if(members.getAllMembers()!=null)
     {
       updateAllMembersTable();
+      updateAddMemberMemberTable();
     }
     if(groups.getAllGroups()!=null)
     {
       updateAllGroupsTable();
       updateAllGroupsCombo();
+      updateScheduledGroupsTables();
     }
     if(instructors.getAllInstructors()!=null)
     {
       updateAllInstructorsTable();
       updateGroupInstructors();
     }
-
+    if(weeks.getAllWeeks()!=null)
+    {
+      updateScheduledGroupsTables();
+    }
 
     allInstructorsAddGroup.getSelectionModel().select("Select Instructor");
 
@@ -295,6 +302,7 @@ public class Controller
     
     membersTabPane.getSelectionModel().select(editMemberTab);
     enableEditTabs();
+
   }
   public void editMemberSearch(ActionEvent actionEvent)
   {
@@ -320,7 +328,24 @@ public class Controller
     Member created = new Member(name,address,phone,email,0,membership);
     members.addMember(created);
     setStatus(3);
+    cleanAddMember();
+    membersTabPane.getSelectionModel().select(allMembersTab);
     updateAllMembersTable();
+    updateAddMemberMemberTable();
+
+  }
+
+  public void saveEditedMember(ActionEvent actionEvent)
+  {
+    membersEdited = members.getAllMembers();
+    Member toAdd = new Member(memberNameFieldEdit.getText(),memberAddressEdit.getText(),Integer.parseInt(memberPhoneEdit.getText()),memberEmailEdit.getText(),editedMember.getID(),memberPremiumEdit.isSelected());
+    membersEdited.setMember(membersEdited.indexOfPhoneNumber(editedMember.getPhone()),toAdd);
+    members.saveMembers(membersEdited);
+    setStatus(2);
+    updateAllMembersTable();
+    disableEditTabs();
+    updateAddMemberMemberTable();
+
   }
 
   public void deleteMember(ActionEvent actionEvent)
@@ -328,6 +353,8 @@ public class Controller
     members.deleteMembers(allMembersTable.getSelectionModel().getSelectedItem());
     setStatus(4);
     updateAllMembersTable();
+    updateAddMemberMemberTable();
+
   }
 
   public void deleteGroup(ActionEvent actionEvent)
@@ -375,17 +402,6 @@ public class Controller
     groupTabPane.getSelectionModel().select(allGroupsTab);
     updateAllGroupsTable();
     updateAllGroupsCombo();
-  }
-
-  public void saveEditedMember(ActionEvent actionEvent)
-  {
-    membersEdited = members.getAllMembers();
-    Member toAdd = new Member(memberNameFieldEdit.getText(),memberAddressEdit.getText(),Integer.parseInt(memberPhoneEdit.getText()),memberEmailEdit.getText(),editedMember.getID(),memberPremiumEdit.isSelected());
-    membersEdited.setMember(membersEdited.indexOfPhoneNumber(editedMember.getPhone()),toAdd);
-    members.saveMembers(membersEdited);
-    setStatus(2);
-    updateAllMembersTable();
-    disableEditTabs();
   }
 
   public void searchInstructor(ActionEvent actionEvent)
@@ -436,6 +452,8 @@ public class Controller
     instructors.addInstructor(created);
     setStatus(3);
     updateAllInstructorsTable();
+    cleanInstructorsAdd();
+    instructorsTabPane.getSelectionModel().select(allInstructorsTab);
     updateGroupInstructors();
   }
 
@@ -479,27 +497,67 @@ public class Controller
       groups.saveGroup(groupsEdited);
     }
     weeks.addScheduledGroup(groupToAdd);
-    System.out.println(weeks.getAllWeeks());
+    updateScheduledGroupsTables();
   }
 
   public void deleteScheduledGroup(ActionEvent actionEvent)
   {
+    weeks.deleteScheduledGroup(allScheduledGroupsTable.getSelectionModel().getSelectedItem());
+    System.out.println("delete");
+    updateScheduledGroupsTables();
+
   }
 
   public void editScheduledGroup(ActionEvent actionEvent)
   {
+    scheduledGroupTabPane.getSelectionModel().select(editScheduledGroupTab);
+    enableEditTabs();
+    editedScheduledGroup = allScheduledGroupsTable.getSelectionModel().getSelectedItem();
+    editScheduledGroupName.setText(editedScheduledGroup.getName());
+    editScheduledGroupHour.setText(editedScheduledGroup.getTime().getTime().getHour()+"");
+    editScheduledGroupMinutes.setText(editedScheduledGroup.getTime().getTime().getMinute()+"");
+    editScheduledGroupMaxAttendants.setText(editedScheduledGroup.getMaxLimit()+"");
+    editScheduledGroupInstructorsCombo.getSelectionModel().select(instructors.getAllInstructors().getIndex(editedScheduledGroup.getInstructor()));
+    LocalDate tempDate = LocalDate.of(editedScheduledGroup.getTime().getYear(),editedScheduledGroup.getTime().getMonth(),editedScheduledGroup.getTime().getDay());
+    editScheduledGroupDatePicker.setValue(tempDate);
   }
-
   public void addMemberToGroupTable(ActionEvent actionEvent)
   {
+    updateScheduledGroupsTables();
+    Member tempMember = addMemberMemberTable.getSelectionModel().getSelectedItem();
+    ScheduledGroup tempGroup = addMemberGroupTable.getSelectionModel().getSelectedItem();
+    scheduledEdited = weeks.getAllWeeks();
+    scheduledEdited.addMember(tempMember,tempGroup);
+    weeks.saveWeeks(scheduledEdited);
+    updateScheduledGroupsTables();
+    updateAddMemberMemberTable();
   }
   public void saveEditedScheduledGroup(ActionEvent actionEvent)
   {
+    int weekIndex = weeks.getAllWeeks().getWeekIndex(editedScheduledGroup);
+    int dayIndex = weeks.getAllWeeks().getWeek(weekIndex).getDayIndex(editedScheduledGroup);
+    int groupIndex = weeks.getAllWeeks().getWeek(weekIndex).getDays().get(dayIndex).getIndexOfGroup(editedScheduledGroup);
+    
+    Group tempGroup = new Group(editScheduledGroupName.getText(),(editedScheduledGroup.getSpaceLeft()+(Integer.parseInt(editScheduledGroupMaxAttendants.getText().trim())-editedScheduledGroup.getMaxLimit())),instructors.getAllInstructors().getInstructorByName((String) editScheduledGroupInstructorsCombo.getSelectionModel().getSelectedItem()));
+    LocalDate temp = editScheduledGroupDatePicker.getValue();
+    int minutes = Integer.parseInt(editScheduledGroupMinutes.getText().trim());
+    int hours = Integer.parseInt(editScheduledGroupHour.getText().trim());
+    Date tempDate = new Date(temp.getDayOfMonth(),temp.getMonthValue(),temp.getYear(),hours,minutes);
+
+    ScheduledGroup toReplace = new ScheduledGroup(tempGroup,tempDate);
+    toReplace.addMembers(editedScheduledGroup.getMembers());
+    scheduledEdited = weeks.getAllWeeks();
+    scheduledEdited.setGroup(weekIndex,dayIndex,groupIndex,toReplace);
+    scheduledGroupTabPane.getSelectionModel().select(allScheduledGroupsTab);
+    weeks.saveWeeks(scheduledEdited);
+    disableEditTabs();
+    updateAddMemberMemberTable();
+    updateScheduledGroupsTables();
   }
 
   public void bookGroup(ActionEvent event)
   {
-
+    updateScheduledGroupsTables();
   }
   public void updateAllMembersTable()
   {
@@ -547,5 +605,43 @@ public class Controller
     ObservableList<String> groupsCombo = FXCollections.observableArrayList(groups.getAllGroups().getStringArray());
     allGroupsScheduleCombo.setItems(groupsCombo);
     editScheduledGroupInstructorsCombo.setItems(groupsCombo);
+  }
+  public void cleanAddMember()
+  {
+    memberNameFieldAdd.setText("");
+    memberPhoneAdd.setText("");
+    memberEmailAdd.setText("");
+    memberAddressAdd.setText("");
+    memberPremiumAdd.setSelected(false);
+  }
+  public void cleanInstructorsAdd()
+  {
+    instructorNameFieldAdd.setText("");
+    instructorPhoneAdd.setText("");
+    instructorEmailAdd.setText("");
+    instructorAddressAdd.setText("");
+    instructorDescriptionAdd.setText("");
+  }
+  public void updateScheduledGroupsTables()
+  {
+    addMemberGroupName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    addMemberSpaceLeft.setCellValueFactory(new PropertyValueFactory<>("spaceLeft"));
+    allScheduledGroupsName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    allScheduledGroupsInstructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
+    allScheduledGroupsMaxAttendants.setCellValueFactory(new PropertyValueFactory<>("maxLimit"));
+    allScheduledGroupsDate.setCellValueFactory(new PropertyValueFactory<>("time"));
+    allScheduledGroupsMembers.setCellValueFactory(new PropertyValueFactory<>("members"));
+    ArrayList<ScheduledGroup> tempArr = weeks.getAllWeeks().getList();
+    ObservableList<ScheduledGroup> temp = FXCollections.observableArrayList(tempArr);
+    allScheduledGroupsTable.setItems(temp);
+    addMemberGroupTable.setItems(temp);
+  }
+  public void updateAddMemberMemberTable()
+  {
+    addMemberMemberName.setCellValueFactory(new PropertyValueFactory<>("name"));
+    addMemberMemberPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+    ArrayList<Member> tempMembers = members.getAllMembers().getList();
+    ObservableList<Member> newObsMembers = FXCollections.observableArrayList(tempMembers);
+    addMemberMemberTable.setItems(newObsMembers);
   }
 }

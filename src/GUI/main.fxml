@@ -45,6 +45,26 @@
                                     </AnchorPane>
                                 </content>
                               </Tab>
+                              <Tab fx:id="allMembersTab" text="All Members">
+                                 <content>
+                                    <AnchorPane>
+                                       <children>
+                                          <TableView fx:id="allMembersTable" layoutX="-1.0" layoutY="-1.0" pickOnBounds="false" prefHeight="619.0" prefWidth="884.0">
+                                            <columns>
+                                              <TableColumn fx:id="allMembersID" prefWidth="43.0" text="ID" />
+                                              <TableColumn fx:id="allMembersFullName" prefWidth="201.0" text="Full Name" />
+                                                <TableColumn fx:id="allMembersAddress" prefWidth="190.0" text="Address" />
+                                                <TableColumn fx:id="allMembersPhone" prefWidth="133.0" text="Phone" />
+                                                <TableColumn fx:id="allMembersEmail" prefWidth="144.0" text="Email" />
+                                                <TableColumn fx:id="allMembersMembership" prefWidth="146.0" text="Membership" />
+                                            </columns>
+                                          </TableView>
+                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteMember" prefHeight="30.0" prefWidth="85.0" text="Delete" />
+                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editMemberTable" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
                             <Tab fx:id="addMemberTab" text="Add Member">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="945.0">
@@ -162,26 +182,6 @@
                                        </children></AnchorPane>
                               </content>
                             </Tab>
-                              <Tab fx:id="allMembersTab" text="All Members">
-                                 <content>
-                                    <AnchorPane>
-                                       <children>
-                                          <TableView fx:id="allMembersTable" layoutX="-1.0" layoutY="-1.0" pickOnBounds="false" prefHeight="619.0" prefWidth="884.0">
-                                            <columns>
-                                              <TableColumn fx:id="allMembersID" prefWidth="43.0" text="ID" />
-                                              <TableColumn fx:id="allMembersFullName" prefWidth="201.0" text="Full Name" />
-                                                <TableColumn fx:id="allMembersAddress" prefWidth="190.0" text="Address" />
-                                                <TableColumn fx:id="allMembersPhone" prefWidth="133.0" text="Phone" />
-                                                <TableColumn fx:id="allMembersEmail" prefWidth="144.0" text="Email" />
-                                                <TableColumn fx:id="allMembersMembership" prefWidth="146.0" text="Membership" />
-                                            </columns>
-                                          </TableView>
-                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteMember" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editMemberTable" prefHeight="30.0" prefWidth="85.0" text="Edit" />
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </Tab>
                               <Tab fx:id="editMemberTab" onSelectionChanged="#disableEditTabs" text="Edit Member">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="945.0">
@@ -519,6 +519,26 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
+                              <Tab fx:id="allInstructorsTab" text="All Instructors">
+                                 <content>
+                                    <AnchorPane>
+                                       <children>
+                                          <TableView fx:id="allInstructorsTable" layoutY="-1.0" prefHeight="619.0" prefWidth="906.0">
+                                             <columns>
+                                                <TableColumn fx:id="allInstructorsID" prefWidth="43.0" text="ID" />
+                                                <TableColumn fx:id="allInstructorsFullName" prefWidth="237.0" text="Full Name" />
+                                                <TableColumn fx:id="allInstructorsAddress" prefWidth="148.0" text="Address" />
+                                                <TableColumn fx:id="allInstructorsPhone" prefWidth="136.0" text="Phone" />
+                                                <TableColumn fx:id="allInstructorsEmail" prefWidth="141.0" text="Email" />
+                                                <TableColumn fx:id="allInstructorsDescription" prefWidth="200.0" text="Description" />
+                                             </columns>
+                                          </TableView>
+                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteInstructor" prefHeight="30.0" prefWidth="85.0" text="Delete" />
+                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editInstructorTable" prefHeight="30.0" prefWidth="85.0" text="Edit" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
                               <Tab fx:id="addInstructorTab" text="Add Instructor">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="945.0">
@@ -623,26 +643,6 @@
                                                 <Insets left="100.0" />
                                              </padding>
                                           </HBox>
-                                       </children>
-                                    </AnchorPane>
-                                 </content>
-                              </Tab>
-                              <Tab fx:id="allInstructorsTab" text="All Instructors">
-                                 <content>
-                                    <AnchorPane>
-                                       <children>
-                                          <TableView fx:id="allInstructorsTable" layoutY="-1.0" prefHeight="619.0" prefWidth="906.0">
-                                             <columns>
-                                                <TableColumn fx:id="allInstructorsID" prefWidth="43.0" text="ID" />
-                                                <TableColumn fx:id="allInstructorsFullName" prefWidth="237.0" text="Full Name" />
-                                                <TableColumn fx:id="allInstructorsAddress" prefWidth="148.0" text="Address" />
-                                                <TableColumn fx:id="allInstructorsPhone" prefWidth="136.0" text="Phone" />
-                                                <TableColumn fx:id="allInstructorsEmail" prefWidth="141.0" text="Email" />
-                                                <TableColumn fx:id="allInstructorsDescription" prefWidth="200.0" text="Description" />
-                                             </columns>
-                                          </TableView>
-                                          <Button layoutX="915.0" mnemonicParsing="false" onAction="#deleteInstructor" prefHeight="30.0" prefWidth="85.0" text="Delete" />
-                                          <Button layoutX="915.0" layoutY="44.0" mnemonicParsing="false" onAction="#editInstructorTable" prefHeight="30.0" prefWidth="85.0" text="Edit" />
                                        </children>
                                     </AnchorPane>
                                  </content>

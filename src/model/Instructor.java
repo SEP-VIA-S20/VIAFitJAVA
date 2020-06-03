@@ -25,7 +25,7 @@ public class Instructor extends Person implements Serializable
 
   @Override public String toString()
   {
-    return "Instructor: "+ super.toString().replace("]","| Description : "+description+" ]");
+    return getName()+" +45 "+getPhone();
   }
   @Override public boolean equals(Object obj)
   {

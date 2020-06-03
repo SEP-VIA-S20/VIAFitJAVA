@@ -28,13 +28,58 @@ public class Day implements Serializable
   }
   public void removeGroup(ScheduledGroup group)
   {
-    classes.remove(group);
+    for (int i = 0; i < classes.size(); i++)
+    {
+      if (classes.get(i).equals(group))
+      {
+        classes.remove(i);
+      }
+    }
   }
   public boolean containsGroup(ScheduledGroup group)
   {
-    return classes.contains(group);
+    for (int i = 0; i < classes.size(); i++)
+    {
+      if (classes.get(i).equals(group))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  public boolean containsID(int id)
+  {
+    for (int i = 0; i < classes.size(); i++)
+    {
+      if (classes.get(i).getGroupID()==id)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
+  public int getIndexOfGroup(ScheduledGroup group)
+  {
+    for (int i = 0; i < classes.size(); i++)
+    {
+      if (classes.get(i).equals(group))
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+  public void removeById(int id)
+  {
+    for (int i = 0; i < classes.size(); i++)
+    {
+      if (classes.get(i).getGroupID()==id)
+      {
+        classes.remove(i);
+      }
+    }
+  }
   public ArrayList<ScheduledGroup> getClasses()
   {
     return classes;
@@ -44,7 +89,10 @@ public class Day implements Serializable
   {
     this.classes = classes;
   }
-
+  public void setGroup(int index,ScheduledGroup group)
+  {
+    classes.set(index,group);
+  }
   public Date getDate()
   {
     return date;

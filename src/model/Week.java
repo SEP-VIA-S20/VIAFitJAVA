@@ -18,7 +18,6 @@ public class Week implements Serializable
   {
     return weekNumber;
   }
-
   public void setWeekNumber(int weekNumber)
   {
     this.weekNumber = weekNumber;
@@ -48,14 +47,20 @@ public class Week implements Serializable
       days.add(toAdd);
     }
   }
+  public void setGroup(int dayIndex,int groupIndex, ScheduledGroup group)
+  {
+    Day temp = days.get(dayIndex);
+    temp.setGroup(groupIndex,group);
+    days.set(dayIndex,temp);
+  }
   public void deleteScheduledGroup(ScheduledGroup group)
   {
     for (int i = 0; i < days.size(); i++)
     {
-      if (days.get(i).containsGroup(group))
+      if (days.get(i).containsID(group.getGroupID()))
       {
         Day temp = days.get(i);
-        temp.removeGroup(group);
+        temp.removeById(group.getGroupID());
         days.set(i, temp);
       }
       if (days.get(i).isEmpty())
@@ -64,7 +69,15 @@ public class Week implements Serializable
       }
     }
   }
-
+  public boolean containsGroup(ScheduledGroup group)
+  {
+    boolean contains = false;
+    for(int i=0;i<days.size();i++)
+    {
+      if(days.get(i).containsGroup(group)) contains = true;
+    }
+    return contains;
+  }
   public ArrayList<Day> getDays()
   {
     return days;
@@ -89,7 +102,17 @@ public class Week implements Serializable
   {
     return days.contains(day);
   }
-
+  public int getDayIndex(ScheduledGroup group)
+  {
+    for (int i = 0; i < days.size(); i++)
+    {
+      if (days.get(i).containsGroup(group))
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
   @Override public String toString()
   {
     String returned = "Week nr: "+ weekNumber;

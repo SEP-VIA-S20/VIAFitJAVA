@@ -5,28 +5,82 @@ import java.util.ArrayList;
 
 public class ScheduledGroup implements Serializable
 {
-  private Group group;
+  private String name;
+  private Instructor instructor;
+  private int maxLimit;
   private ArrayList<Member> members;
   private Date time;
+  private int spaceLeft;
+  private int groupID;
+
+  public int getSpaceLeft()
+  {
+    return spaceLeft;
+  }
 
   public ScheduledGroup(Group group,Date time)
   {
-    this.group = group;
+    this.name = group.getName();
+    this.instructor = group.getInstructor();
+    this.maxLimit = group.getMaxLimit();
     this.time = time;
     this.members = new ArrayList<Member>();
+    spaceLeft = maxLimit;
+    groupID=0;
   }
-    public ArrayList<Member> getMembers()
+
+  public int getGroupID()
+  {
+    return groupID;
+  }
+
+  public void setGroupID(int groupID)
+  {
+    this.groupID = groupID;
+  }
+
+  public ArrayList<Member> getMembers()
     {
       return members;
     }
     public void addMember(Member member)
     {
-      if(members.size()<group.getMaxLimit())
+      if(members.size()<maxLimit)
       {
         members.add(member);
+        spaceLeft--;
       }
     }
-    public void removeMember(Member member)
+  public void addMembers(ArrayList<Member> toAdd)
+  {
+    members.addAll(toAdd);
+  }
+  public void setName(String name)
+  {
+    this.name = name;
+  }
+
+  public void setInstructor(Instructor instructor)
+  {
+    this.instructor = instructor;
+  }
+
+  public void setMaxLimit(int maxLimit)
+  {
+    this.maxLimit = maxLimit;
+  }
+
+  public void setMembers(ArrayList<Member> members)
+  {
+    this.members = members;
+  }
+
+  public void setSpaceLeft(int spaceLeft)
+  {
+    this.spaceLeft = spaceLeft;
+  }
+
+  public void removeMember(Member member)
     {
       members.remove(member);
     }
@@ -42,15 +96,6 @@ public class ScheduledGroup implements Serializable
       }
       return null;
     }
-  public Group getGroup()
-  {
-    return group;
-  }
-
-  public void setGroup(Group group)
-  {
-    this.group = group;
-  }
 
   public Date getTime()
   {
@@ -64,13 +109,32 @@ public class ScheduledGroup implements Serializable
 
   @Override public String toString()
   {
-    return group.toString()+" | Time: "+time+" | Members: " + members;
+    if(name!=null&&instructor!=null&&time!=null)
+    {
+      return "Name: "+name+" Instructor "+instructor.getName()+" MaxLimit "+maxLimit+" | Time: "+time+" | Members: " + members;
+
+    }
+    return "";
   }
 
+  public String getName()
+  {
+    return name;
+  }
+
+  public Instructor getInstructor()
+  {
+    return instructor;
+  }
+
+  public int getMaxLimit()
+  {
+    return maxLimit;
+  }
   @Override public boolean equals(Object obj)
   {
     if(!(obj instanceof ScheduledGroup)) return false;
     ScheduledGroup temp = (ScheduledGroup)obj;
-    return temp.toString().equals(toString());
+    return toString().equals(temp.toString());
   }
 }
