@@ -1,40 +1,50 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Day implements Serializable
 {
   private ArrayList<ScheduledGroup> classes;
   private Date date;
+  private int dayOfWeek;
 
-  public Day(int day)
+  public int getDayOfWeek()
   {
-    this.date = new Date(day);
+    return dayOfWeek;
+  }
+
+  public void setDayOfWeek(int dayOfWeek)
+  {
+    this.dayOfWeek = dayOfWeek;
+  }
+
+  public Day(Date date)
+  {
+    this.date = date;
     classes = new ArrayList<ScheduledGroup>();
+    LocalDate temp = LocalDate.of(date.getYear(),date.getMonth(),date.getDay());
+    dayOfWeek =temp.getDayOfWeek().getValue();
   }
 
   public Day(ArrayList<ScheduledGroup> classes, Date date)
   {
     this.classes = classes;
     this.date = date;
+    dayOfWeek =0;
   }
   public void addGroup(ScheduledGroup group)
   {
-    if (group.getTime().getDay()==date.getDay())
-    {
       classes.add(group);
-    }
+  }
+  public void removeGroup(int index)
+  {
+    classes.remove(index);
   }
   public void removeGroup(ScheduledGroup group)
   {
-    for (int i = 0; i < classes.size(); i++)
-    {
-      if (classes.get(i).equals(group))
-      {
-        classes.remove(i);
-      }
-    }
+    classes.remove(group);
   }
   public boolean containsGroup(ScheduledGroup group)
   {
@@ -64,6 +74,17 @@ public class Day implements Serializable
     for (int i = 0; i < classes.size(); i++)
     {
       if (classes.get(i).equals(group))
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+  public int getIndexOfID(int id)
+  {
+    for (int i = 0; i < classes.size(); i++)
+    {
+      if (classes.get(i).getGroupID() == id)
       {
         return i;
       }
@@ -127,11 +148,11 @@ public class Day implements Serializable
 
   public static void main(String[] args)
   {
-    Day day1 = new Day(25);
     ScheduledGroup test = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
-    ScheduledGroup test1 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
-    ScheduledGroup test2 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
-    ScheduledGroup test3 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
+    ScheduledGroup test1 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(28));
+    ScheduledGroup test2 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(26));
+    ScheduledGroup test3 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(27));
+    Day day1 = new Day(test.getTime());
     day1.addGroup(test);
     day1.addGroup(test1);
     day1.addGroup(test2);
@@ -142,8 +163,8 @@ public class Day implements Serializable
     day1.removeGroup(test1);
     System.out.println(day1);
     day1.removeGroup(test2);
-    day1.removeGroup(test3);
     System.out.println(day1);
     System.out.println(day1.isEmpty());
+    System.out.println(day1.getIndexOfID(1));
   }
 }

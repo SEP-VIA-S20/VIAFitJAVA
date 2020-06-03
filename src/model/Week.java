@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Week implements Serializable
@@ -24,12 +25,14 @@ public class Week implements Serializable
   }
   public void addGroup(ScheduledGroup group)
   {
-    int day = group.getTime().getDay();
+    Date groupDay = group.getTime();
+    LocalDate tempDate = LocalDate.of(groupDay.getYear(),groupDay.getMonth(),groupDay.getDay());
+    int weekDay = tempDate.getDayOfWeek().getValue();
     int dayIndex = -1;
     boolean contains = false;
     for (int i = 0; i < days.size(); i++)
     {
-      if (days.get(i).getDate().getDay() == day)
+      if (days.get(i).getDayOfWeek()==weekDay)
       {
         contains = true;
         dayIndex = i;
@@ -42,7 +45,9 @@ public class Week implements Serializable
       days.set(dayIndex,temp);
     }else
     {
-      Day toAdd = new Day(day);
+      Day toAdd = new Day(group.getTime());
+      LocalDate temp = LocalDate.of(toAdd.getDate().getYear(),toAdd.getDate().getMonth(),toAdd.getDate().getDay());
+      toAdd.setDayOfWeek(temp.getDayOfWeek().getValue());
       toAdd.addGroup(group);
       days.add(toAdd);
     }
@@ -53,20 +58,13 @@ public class Week implements Serializable
     temp.setGroup(groupIndex,group);
     days.set(dayIndex,temp);
   }
-  public void deleteScheduledGroup(ScheduledGroup group)
+  public void removeGroup(ScheduledGroup group)
   {
     for (int i = 0; i < days.size(); i++)
     {
-      if (days.get(i).containsID(group.getGroupID()))
-      {
         Day temp = days.get(i);
-        temp.removeById(group.getGroupID());
-        days.set(i, temp);
-      }
-      if (days.get(i).isEmpty())
-      {
-        days.remove(i);
-      }
+        temp.removeGroup(group);
+        days.set(i,temp);
     }
   }
   public boolean containsGroup(ScheduledGroup group)
@@ -129,16 +127,22 @@ public class Week implements Serializable
     Week week = (Week)obj;
     return week.toString().equals(toString());
   }
-  //    public static void main(String[] args)
-//    {
-//      Day day1 = new Day(25);
-//      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
-//      Week nr1 = new Week(20);
-//      nr1.addDay(day1);
-//      System.out.println(day1);
-//      System.out.println(nr1);
-//    }
+      public static void main(String[] args)
+    {
+      ScheduledGroup test = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25));
+      ScheduledGroup test1 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(26));
+      ScheduledGroup test2 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(27));
+      ScheduledGroup test3 = new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(28));
+      Day day1 = new Day(test.getTime());
+      Week nr1 = new Week(0);
+      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
+      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
+      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
+      day1.addGroup(new ScheduledGroup(new Group("pilates",20,new Instructor("name","strand",31,"ea",2143,"descript")),new Date(25)));
+      nr1.addGroup(test);
+      nr1.addGroup(test1);
+      nr1.addGroup(test2);
+      nr1.addGroup(test3);
+      System.out.println(nr1);
+    }
 }

@@ -18,6 +18,7 @@ public class ScheduledGroup implements Serializable
     return spaceLeft;
   }
 
+
   public ScheduledGroup(Group group,Date time)
   {
     this.name = group.getName();

@@ -204,12 +204,7 @@ public class Controller
     showMemberField.setEditable(false);
     showInstructorField.setEditable(false);
 
-
-
     disableEditTabs();
-
-
-
 
     if(members.getAllMembers()!=null)
     {
@@ -281,6 +276,9 @@ public class Controller
 
   public void addToGroupSearched(ActionEvent actionEvent)
   {
+    mainTabPane.getSelectionModel().select(scheduleAGroupTab);
+    scheduledGroupTabPane.getSelectionModel().select(addMemberToGroupTab);
+    addMemberMemberTable.getSelectionModel().select(editedMember);
   }
 
   public void searchMember(ActionEvent actionEvent)
@@ -288,7 +286,10 @@ public class Controller
     membersEdited = members.getAllMembers();
     int phone = Integer.parseInt(searchMemberPhoneField.getText().trim());
     editedMember = membersEdited.getMemberByPhone(phone);
-    showMemberField.setText(editedMember.getName()+" "+editedMember.getPhone());
+    if(editedMember!=null)
+    {
+      showMemberField.setText(editedMember.getName()+" "+editedMember.getPhone());
+    }
   }
 
   public void editMemberTable(ActionEvent actionEvent)
@@ -383,9 +384,7 @@ public class Controller
     setStatus(3);
     updateAllGroupsTable();
     groupTabPane.getSelectionModel().select(allGroupsTab);
-    groupNameAdd.setText("");
-    allInstructorsAddGroup.getSelectionModel().select("Select Instructor");
-    maxAttendantsAdd.setText("");
+    cleanGroupAdd();
     updateAllGroupsCombo();
   }
 
@@ -478,11 +477,14 @@ public class Controller
 
   public void updateScheduleGroupFields(ActionEvent event)
   {
-    Group temp = groups.getAllGroups().getGroup(groups.getAllGroups().getIndexOfName((String) allGroupsScheduleCombo.getSelectionModel().getSelectedItem()));
-    scheduleGroupName.setText(temp.getName());
-    scheduleGroupMaxAttendants.setText(temp.getMaxLimit()+"");
-    scheduleGroupInstructorsCombo.getSelectionModel().select(instructors.getAllInstructors().getIndex(temp.getInstructor()));
-  }
+    if (groups.getAllGroups().getIndexOfName((String) allGroupsScheduleCombo.getSelectionModel().getSelectedItem())!=-1)
+    {
+      Group temp = groups.getAllGroups().getGroup(groups.getAllGroups().getIndexOfName((String) allGroupsScheduleCombo.getSelectionModel().getSelectedItem()));
+      scheduleGroupName.setText(temp.getName());
+      scheduleGroupMaxAttendants.setText(temp.getMaxLimit()+"");
+      scheduleGroupInstructorsCombo.getSelectionModel().select(instructors.getAllInstructors().getIndex(temp.getInstructor()));
+    }
+    }
 
   public void scheduleClass(ActionEvent actionEvent)
   {
@@ -490,20 +492,26 @@ public class Controller
     LocalDate localDate = scheduleGroupDatePicker.getValue();
     Date groupDate = new Date(localDate.getDayOfMonth(),localDate.getMonthValue(),localDate.getYear(),new Time(Integer.parseInt(scheduleGroupHour.getText().trim()),Integer.parseInt(scheduleGroupMinutes.getText().trim())));
     ScheduledGroup groupToAdd = new ScheduledGroup(toAdd,groupDate);
-    groupsEdited = groups.getAllGroups();
-    if(!(groupsEdited.getIndexOfName(toAdd.getName())==-1))
+
+    if(groups.getAllGroups()!=null)
     {
-      groupsEdited.addGroup(toAdd);
-      groups.saveGroup(groupsEdited);
+      groupsEdited = groups.getAllGroups();
+      if((groupsEdited.getIndexOfName(toAdd.getName())==-1))
+      {
+        groupsEdited.addGroup(toAdd);
+        groups.saveGroup(groupsEdited);
+      }
     }
     weeks.addScheduledGroup(groupToAdd);
+    updateAllGroupsCombo();
+    updateAllGroupsTable();
     updateScheduledGroupsTables();
+    scheduledGroupTabPane.getSelectionModel().select(allScheduledGroupsTab);
   }
 
   public void deleteScheduledGroup(ActionEvent actionEvent)
   {
     weeks.deleteScheduledGroup(allScheduledGroupsTable.getSelectionModel().getSelectedItem());
-    System.out.println("delete");
     updateScheduledGroupsTables();
 
   }
@@ -538,13 +546,14 @@ public class Controller
     int dayIndex = weeks.getAllWeeks().getWeek(weekIndex).getDayIndex(editedScheduledGroup);
     int groupIndex = weeks.getAllWeeks().getWeek(weekIndex).getDays().get(dayIndex).getIndexOfGroup(editedScheduledGroup);
     
-    Group tempGroup = new Group(editScheduledGroupName.getText(),(editedScheduledGroup.getSpaceLeft()+(Integer.parseInt(editScheduledGroupMaxAttendants.getText().trim())-editedScheduledGroup.getMaxLimit())),instructors.getAllInstructors().getInstructorByName((String) editScheduledGroupInstructorsCombo.getSelectionModel().getSelectedItem()));
+    Group tempGroup = new Group(editScheduledGroupName.getText(),(Integer.parseInt(editScheduledGroupMaxAttendants.getText().trim())),instructors.getAllInstructors().getInstructorByName((String) editScheduledGroupInstructorsCombo.getSelectionModel().getSelectedItem()));
     LocalDate temp = editScheduledGroupDatePicker.getValue();
     int minutes = Integer.parseInt(editScheduledGroupMinutes.getText().trim());
     int hours = Integer.parseInt(editScheduledGroupHour.getText().trim());
     Date tempDate = new Date(temp.getDayOfMonth(),temp.getMonthValue(),temp.getYear(),hours,minutes);
 
     ScheduledGroup toReplace = new ScheduledGroup(tempGroup,tempDate);
+    toReplace.setSpaceLeft(editedScheduledGroup.getSpaceLeft()+(Integer.parseInt(editScheduledGroupMaxAttendants.getText().trim())-editedScheduledGroup.getMaxLimit()));
     toReplace.addMembers(editedScheduledGroup.getMembers());
     scheduledEdited = weeks.getAllWeeks();
     scheduledEdited.setGroup(weekIndex,dayIndex,groupIndex,toReplace);
@@ -554,7 +563,6 @@ public class Controller
     updateAddMemberMemberTable();
     updateScheduledGroupsTables();
   }
-
   public void bookGroup(ActionEvent event)
   {
     updateScheduledGroupsTables();
@@ -621,6 +629,12 @@ public class Controller
     instructorEmailAdd.setText("");
     instructorAddressAdd.setText("");
     instructorDescriptionAdd.setText("");
+  }
+  public void cleanGroupAdd()
+  {
+    groupNameAdd.setText("");
+    allInstructorsAddGroup.getSelectionModel().select("Select Instructor");
+    maxAttendantsAdd.setText("");
   }
   public void updateScheduledGroupsTables()
   {

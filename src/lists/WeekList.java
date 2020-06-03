@@ -79,12 +79,9 @@ public class WeekList implements Serializable
   {
     for (int i = 0; i < weeks.size(); i++)
     {
-      if (weeks.get(i).getDays().contains(group))
-      {
         Week temp = weeks.get(i);
-        temp.deleteScheduledGroup(group);
+        temp.removeGroup(group);
         weeks.set(i,temp);
-      }
       if (isEmpty(i))
       {
         weeks.remove(i);
