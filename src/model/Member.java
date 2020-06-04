@@ -27,7 +27,10 @@ public class Member extends Person implements Serializable
   {
     return getName()+" +45 "+getPhone()+"\n";
   }
-
+ public Member copy()
+ {
+   return new Member(getName(),getAddress(),getPhone(),getEmail(),getID(), premiumMember);
+ }
   @Override public boolean equals(Object obj)
   {
     if(!(obj instanceof Member)) return false;

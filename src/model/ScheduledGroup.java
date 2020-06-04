@@ -49,7 +49,7 @@ public class ScheduledGroup implements Serializable
       if(members.size()<maxLimit)
       {
         members.add(member);
-        spaceLeft--;
+        spaceLeft=maxLimit-members.size();
       }
     }
   public void addMembers(ArrayList<Member> toAdd)
@@ -111,11 +111,10 @@ public class ScheduledGroup implements Serializable
   @Override public String toString()
   {
     if(name!=null&&instructor!=null&&time!=null)
-    {
-      return "Name: "+name+" Instructor "+instructor.getName()+" MaxLimit "+maxLimit+" | Time: "+time+" | Members: " + members;
-
-    }
-    return "";
+  {
+    return name+" "+time.getTimeString()+" \n"+instructor.getName()+"\n";
+  }
+    return "No instructor";
   }
 
   public String getName()

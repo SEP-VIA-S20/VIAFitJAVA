@@ -88,10 +88,10 @@ public class WeekList implements Serializable
       }
     }
   }
-  public void setGroup(int weekIndex,int dayIndex,int groupIndex,ScheduledGroup group)
+  public void setGroup(int weekIndex,int groupIndex,ScheduledGroup group)
   {
     Week temp = weeks.get(weekIndex);
-    temp.setGroup(dayIndex,groupIndex,group);
+    temp.setGroup(groupIndex,group);
     weeks.set(weekIndex,temp);
   }
   public void addMember(Member member, ScheduledGroup group)
@@ -100,7 +100,7 @@ public class WeekList implements Serializable
     int dayIndex = weeks.get(weekIndex).getDayIndex(group);
     int groupIndex = weeks.get(weekIndex).getDays().get(dayIndex).getIndexOfGroup(group);
     group.addMember(member);
-    setGroup(weekIndex,dayIndex,groupIndex,group);
+    setGroup(weekIndex,groupIndex,group);
   }
   public boolean isEmpty(int index)
   {
@@ -127,7 +127,6 @@ public class WeekList implements Serializable
   }
   public ArrayList<ScheduledGroup> getList()
   {
-    if (weeks.size()==0) return null;
     ArrayList<ScheduledGroup> groupsList = new ArrayList<ScheduledGroup>();
     for (int i = 0; i < weeks.size(); i++)
     {
@@ -143,6 +142,16 @@ public class WeekList implements Serializable
       }
     }
     return groupsList;
+  }
+  public String getXML()
+  {
+    String returned="<schedule>";
+    for(int i=0;i<weeks.size();i++)
+    {
+      returned+=weeks.get(i).getXML();
+    }
+    returned+="</schedule>";
+    return returned;
   }
 
   public static void main(String[] args)
@@ -166,15 +175,7 @@ public class WeekList implements Serializable
     weekList.addClass(g7);
     System.out.println(weekList);
     System.out.println("\n\n\n");
-    weekList.removeClass(g1);
-    weekList.removeClass(g2);
-    weekList.removeClass(g3);
-    weekList.removeClass(g4);
-    weekList.removeClass(g5);
-    weekList.removeClass(g6);
-    weekList.removeClass(g7);
-    System.out.println("\n\n\n");
-
+    System.out.println(weekList.getXML());
     System.out.println(weekList);
   }
 

@@ -913,7 +913,7 @@
                                     </AnchorPane>
                                  </content>
                               </Tab>
-                              <Tab fx:id="addMemberToGroupTab" text="Add member to group">
+                              <Tab fx:id="addMemberToGroupTab" onSelectionChanged="#updateScheduledGroupsTables" text="Add member to group">
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
@@ -1035,7 +1035,7 @@
                                           </TableView>
                                           <TableView fx:id="addMemberGroupTable" layoutX="594.0" layoutY="1.0" prefHeight="618.0" prefWidth="406.0">
                                              <columns>
-                                                <TableColumn fx:id="addMemberGroupName" prefWidth="202.0" text="Group name" />
+                                                <TableColumn fx:id="addMemberGroupName" onEditCancel="#updateScheduledGroupsTables" prefWidth="202.0" text="Group name" />
                                                 <TableColumn fx:id="addMemberSpaceLeft" prefWidth="203.0" text="Space left" />
                                              </columns>
                                           </TableView>
@@ -1171,7 +1171,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="scheduledTable" layoutY="-1.0" prefHeight="660.0" prefWidth="1000.0">
+                        <TableView fx:id="scheduledTable" layoutY="-1.0" prefHeight="607.0" prefWidth="1000.0">
                            <columns>
                               <TableColumn fx:id="weekNrTableTab" text="Week nr" />
                               <TableColumn fx:id="MondayTableTab" prefWidth="85.0" text="Monday" />
@@ -1179,9 +1179,11 @@
                               <TableColumn fx:id="WednesdayTableTab" prefWidth="137.0" text="Wednesday" />
                               <TableColumn fx:id="ThursdayTableTab" prefWidth="150.0" text="Thursday" />
                               <TableColumn fx:id="FridayTableTab" prefWidth="158.0" text="Friday" />
-                              <TableColumn fx:id="SaturdayTableTab" prefWidth="277.0" text="Saturday" />
+                              <TableColumn fx:id="SaturdayTableTab" prefWidth="153.0" text="Saturday" />
+                              <TableColumn fx:id="SundayTableTab" prefWidth="124.0" text="Sunday" />
                            </columns>
                         </TableView>
+                        <Button layoutX="465.0" layoutY="614.0" mnemonicParsing="false" onAction="#exportXML" text="Export" />
                      </children>
                   </AnchorPane>
                </content>

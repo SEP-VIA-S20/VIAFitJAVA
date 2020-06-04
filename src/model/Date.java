@@ -52,6 +52,11 @@ public class Date implements Serializable
     this.year = year;
     time = new Time(hour, minute);
   }
+
+  public int getDayOfWeek()
+  {
+    return LocalDate.of(year,month,day).getDayOfWeek().getValue();
+  }
   public Date now()
   {
     LocalDate newDate = LocalDate.now();

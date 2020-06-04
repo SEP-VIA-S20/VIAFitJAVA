@@ -22,7 +22,7 @@ public class Day implements Serializable
 
   public Day(Date date)
   {
-    this.date = date;
+    this.date = new Date(date.getDay(),date.getMonth(),date.getYear());
     classes = new ArrayList<ScheduledGroup>();
     LocalDate temp = LocalDate.of(date.getYear(),date.getMonth(),date.getDay());
     dayOfWeek =temp.getDayOfWeek().getValue();
@@ -56,6 +56,43 @@ public class Day implements Serializable
       }
     }
     return false;
+  }
+  public String getDayName()
+  {
+    int temp = date.getDayOfWeek();
+    if (temp == 1)
+    {
+      return "monday";
+    }
+    else if (temp == 2)
+    {
+      return "tuesday";
+    }
+    else if (temp == 3)
+    {
+      return "wednesday";
+    }
+    else if (temp == 4)
+    {
+      return "thursday";
+    }
+    else if (temp == 5)
+    {
+      return "friday";
+    }
+    else if (temp == 6)
+    {
+      return "saturday";
+    }
+    else if (temp == 7)
+    {
+      return "sunday";
+    }
+    else return "day";
+  }
+  public String getXML()
+  {
+    return "<"+getDayName()+">\n"+toString()+"</"+getDayName()+">\n";
   }
   public boolean containsID(int id)
   {
@@ -126,7 +163,7 @@ public class Day implements Serializable
 
   @Override public String toString()
   {
-    String returned = "Day: "+date.toString();
+    String returned = ""+date.toString().replace(" 0:0","");
     for(int i=0;i<classes.size();i++)
     {
       returned+="\n"+classes.get(i).toString();
@@ -166,5 +203,6 @@ public class Day implements Serializable
     System.out.println(day1);
     System.out.println(day1.isEmpty());
     System.out.println(day1.getIndexOfID(1));
+    System.out.println(day1.getXML());
   }
 }
